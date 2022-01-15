@@ -1,0 +1,47 @@
+{
+  "name": "dyatlov-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf build && webpack",
+    "dev": "webpack-dev-server --open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vsrodionov94/dyatlov-app.git"
+  },
+  "keywords": [],
+  "author": "Vladimir Rodionov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vsrodionov94/dyatlov-app/issues"
+  },
+  "homepage": "https://github.com/vsrodionov94/dyatlov-app#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "cssnano": "^5.0.15",
+    "file-loader": "^6.1.0",
+    "html-loader": "^1.3.0",
+    "html-webpack-plugin": "^4.4.1",
+    "mini-css-extract-plugin": "^0.11.3",
+    "node-forge": ">=0.10.0",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^6.2.1",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "gh-pages": "^3.1.0"
+  }
+}
