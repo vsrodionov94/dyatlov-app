@@ -1,0 +1,88 @@
+.radio {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./../../images/lock-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio__icon {
+  min-height: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('./../../images/play-btn.png');
+}
+
+.radio__form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 700px;
+}
+
+.radio__inputs {
+  display: flex;
+  margin: 0 auto 110px;
+}
+
+.radio__input {
+  border: 0;
+  border-radius: 8px;
+  padding: 0;
+  width: 637px;
+  height: 137px;
+  margin-right: 12px;
+  font-size: 95px;
+  text-align: center;
+}
+
+.radio__input-error {
+  background-color: #d14029;
+}
+
+.radio__title {
+  font-size: 48px;
+  margin: 0 auto; 
+  padding-bottom: 55px;
+  padding-top: 20px;
+}
+
+.radio__send-btn {
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 2px solid #d14029;
+  border-radius: 8px;
+  width: 636px;
+  height: 123px;
+  color: #fff;
+  font-size: 48px;
+  margin: 0 auto;
+}
+
+.radio__back-btn {
+  position: absolute;
+  top: 1740px;
+  left: 300px;
+  width: calc(180px * 2);
+  font-size: 48px;
+  text-transform: capitalize;
+  text-align: right;
+  background-image: url('../../images/arrow.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: left;
+  color: #fff;
+  border: none;
+}
+
+.radio__info {
+  opacity: 0;
+  display: none;
+  font-size: 94px;
+  width: 720px;
+  text-align: center;
+  margin: 0 auto;
+}

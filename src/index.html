@@ -3,9 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
   <title>Перевал дятлова</title>
 </head>
 <body>
+  <div class="page">
+    <section class="start" style="display: none;">
+      <button class="start__button"> </button>
+    </section>
+    <section class="main" style="display: none;">
+      <ul class="stats">
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_keys"></div>
+          <p id="keys-count" class="stats__text">2</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_artifacts"></div>
+          <p id="artifacts-count" class="stats__text">100</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_invites"></div>
+          <p id="invites-count" class="stats__text">0/3</p>
+        </li>
+      </ul>
+      <button class="main__btn main__btn_lock"></button>
+      <button class="main__btn main__btn_file"></button>
+      <button class="main__btn main__btn_radio"></button>
+      <button class="main__btn main__btn_info"></button>
+    </section>
+    <section class="faq" style="display: none;">
+    </section>
+    <section class="lock" style="display: none;">
+      <ul class="stats">
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_keys"></div>
+          <p id="keys-count" class="stats__text">2</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_artifacts"></div>
+          <p id="artifacts-count" class="stats__text">100</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_invites"></div>
+          <p id="invites-count" class="stats__text">0/3</p>
+        </li>
+      </ul>
+      <form class="lock__form">
+        <div class="lock__icon"></div>
+        <h2 class="lock__title">Ввод ключа</h2>
+        <p class="lock__info">ВОЗВРАЩАЙСЯ В ДЕНЬ ЭФИРА</p>
+        <div class="lock__inputs">
+          <input id="lock-1" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+          <input id="lock-2" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+          <input id="lock-3" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+          <input id="lock-4" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+          <input id="lock-5" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+          <input id="lock-6" type="number" class="lock__input" maxlength="1" minlength="1" value="0">
+        </div>
+        <button class="lock__send-btn"> отправить </button>
+      </form>
+      <button class="lock__back-btn">назад</button>
+      <button class="main__btn main__btn_info"></button>
+    </section>
+    <section class="radio" style="display: none;">
+      <ul class="stats">
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_keys"></div>
+          <p id="keys-count" class="stats__text">2</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_artifacts"></div>
+          <p id="artifacts-count" class="stats__text">100</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_invites"></div>
+          <p id="invites-count" class="stats__text">0/3</p>
+        </li>
+      </ul>
+      <form class="radio__form">
+        <div class="radio__icon"></div>
+        <h2 class="radio__title">Ввести слово</h2>
+        <p class="radio__info">ВОЗВРАЩАЙСЯ В ДЕНЬ ЭФИРА</p>
+        <div class="radio__inputs">
+          <input id="radio-1" type="number" class="radio__input">
+        </div>
+        <button class="radio__send-btn"> отправить </button>
+      </form>
+      <button class="radio__back-btn">назад</button>
+      <button class="main__btn main__btn_info"></button>
+    </section>
+    <section class="send" style="display: none;">
+      <ul class="stats">
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_keys"></div>
+          <p id="keys-count" class="stats__text">2</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_artifacts"></div>
+          <p id="artifacts-count" class="stats__text">100</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_invites"></div>
+          <p id="invites-count" class="stats__text">0/3</p>
+        </li>
+      </ul>
+      <form class="send__form">
+        <div class="send__bg">
+          <div class="send__tabs">
+            <button class="send__tab" id="send">Другие следователи</button>
+            <button class="send__tab" id="answer">Мною интересовались</button>
+          </div>
+          <div class="send__user">
+            <div class="send__avatar"></div>
+            <div class="send__info">
+              <p class="send__text send__name">Констанция Константинопольская</p>
+              <p class="send__text send__sex">пол: женский</p>
+              <p class="send__text send__age">возраст: 46</p>
+            </div>
+          </div>
+          <div class="send__btns">
+            <button class="help__btn">Помочь</button>
+            <button class="skip__btn">Пропустить</button>
+            <button class="unhelp__btn">Помешать</button>
+          </div>
+        </div>
+      </form>
+      <button class="send__back-btn">назад</button>
+      <button class="main__btn main__btn_info"></button>
+    </section>
+    <section class="answer">
+      <ul class="stats">
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_keys"></div>
+          <p id="keys-count" class="stats__text">2</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_artifacts"></div>
+          <p id="artifacts-count" class="stats__text">100</p>
+        </li>
+        <li class="stats__item">
+          <div class="stats__icon stats__icon_invites"></div>
+          <p id="invites-count" class="stats__text">0/3</p>
+        </li>
+      </ul>
+      <form class="answer__form">
+        <div class="answer__bg">
+          <div class="answer__tabs">
+            <button class="answer__tab" id="answer">Другие следователи</button>
+            <button class="answer__tab" id="answer">Мною интересовались</button>
+          </div>
+          <div class="answer__user">
+            <div class="answer__avatar"></div>
+            <div class="answer__info">
+              <p class="answer__text answer__name">Констанция Константинопольская</p>
+              <p class="answer__text answer__sex">пол: женский</p>
+              <p class="answer__text answer__age">возраст: 46</p>
+            </div>
+          </div>
+          <div class="answer__btns">
+            <button class="help__btn">Помочь</button>
+            <button class="unhelp__btn">Помешать</button>
+          </div>
+        </div>
+      </form>
+      <button class="answer__back-btn">назад</button>
+      <button class="main__btn main__btn_info"></button>
+    </section>
+  </div>
 
 </body>
 </html>

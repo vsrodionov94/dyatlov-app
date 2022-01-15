@@ -1,0 +1,42 @@
+.stats {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  padding-left: 76px;
+  padding-top: 185px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stats__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 13px;
+} 
+
+.stats__icon {
+  width: 141px;
+  height: 141px;
+  margin-right: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.stats__text {
+  font-size: 57px;
+  margin: 0;
+}
+
+.stats__icon_keys {
+  background-image: url('./../../images/icons/keys.png');
+}
+
+.stats__icon_artifacts {
+  background-image: url('./../../images/icons/artifacts.png');
+}
+
+.stats__icon_invites {
+  background-image: url('./../../images/icons/invite.png');
+}

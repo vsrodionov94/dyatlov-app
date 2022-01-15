@@ -1,2 +1,12 @@
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts/fonts.css');
+@import url('../components/page/page.css');
+@import url('../components/start/start.css');
+@import url('../components/main/main.css');
+@import url('../components/stats/stats.css');
+@import url('../components/faq/faq.css');
+@import url('../components/lock/lock.css');
+@import url('../components/radio/radio.css');
+@import url('../components/send/send.css');
+@import url('../components/answer/answer.css');
+@import url('../components/buttons/buttons.css');
