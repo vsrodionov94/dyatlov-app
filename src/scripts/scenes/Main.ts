@@ -1,6 +1,5 @@
 import { modalTypes, stateType } from "../types";
 import Utils from './../libs/Utils';
-import api from './../libs/Api';
 import Stats from './../components/Stats';
 
 export default class Main extends Phaser.Scene {
@@ -45,6 +44,10 @@ export default class Main extends Phaser.Scene {
       this.state.modal = modalTypes.FileAnswer;
       this.hideBtns();
       this.scene.launch('Modal', this.state);
+    });
+
+    Utils.click(faqBtn, () => {
+      this.scene.launch('Tutorial');
     });
   }
 

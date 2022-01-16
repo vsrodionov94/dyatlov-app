@@ -27,6 +27,7 @@ const sendHelpBtn: string = require('../../assets/images/modal/file-send-help-bt
 const sendUnhelpBtn: string = require('../../assets/images/modal/file-send-unhelp-btn.png');
 const sendSkipBtn: string = require('../../assets/images/modal/file-send-skip-btn.png');
 const avatar: string = require('../../assets/images/modal/avatar.png');
+const closeBtn: string = require('../../assets/images/faq/close-btn.png');
 
 class Preload extends Phaser.Scene {
   public state: stateType;
@@ -68,6 +69,7 @@ class Preload extends Phaser.Scene {
     this.load.image('send-unhelp-btn', sendUnhelpBtn);
     this.load.image('send-skip-btn', sendSkipBtn);
     this.load.image('avatar', avatar);
+    this.load.image('close-btn', closeBtn);
   }
 
   public create(): void {

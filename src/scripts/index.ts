@@ -6,6 +6,7 @@ import Preload from './scenes/Preload';
 import Start from './scenes/Start';
 import Modal from './scenes/Modal';
 import Main from './scenes/Main';
+import Tutorial from './scenes/Tutorial';
 
 function gcd(num1: number, num2: number): number {
   while (num1 && num2) num1 > num2 ? num1 %= num2 : num2 %= num1;
@@ -43,7 +44,7 @@ window.onload = (): void => {
       height: canvasHeight,
       parent: 'root',
       render: { transparent: true },
-      scene: [Boot, Preload, Start, Main, Modal],
+      scene: [Boot, Preload, Start, Main, Modal, Tutorial],
 
     }
     
