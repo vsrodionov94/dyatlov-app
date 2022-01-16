@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'CODE-PRO-BOLD';
+  src: url('../assets/fonts/CODE-PRO-BOLD.otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROBLACK-BLACK';
+  src: url('../assets/fonts/NEW_CODEPROBLACK-BLACK.otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROBOLD-NORMAL';
+  src: url('../assets/fonts/NEW_CODEPROBOLD-NORMAL.otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROLC-REGULAR';
+  src: url('../assets/fonts/NEW_CODEPROLC-REGULAR.otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROLIGHT-LIGHT';
+  src: url('../assets/fonts/NEW_CODEPROLIGHT-LIGHT.otf'),
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+div, p, span, h1, h2, h3, h4, img {
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding: 0;
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+#myCanvas {
+  display: none;
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

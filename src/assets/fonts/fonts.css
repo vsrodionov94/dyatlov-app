@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'CODE-PRO-BOLD';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./CODE-PRO-BOLD.otf') format('otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROBLACK-BLACK';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./NEW_CODEPROBLACK-BLACK.otf') format('otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROBOLD-NORMAL';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./NEW_CODEPROBOLD-NORMAL.otf') format('otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROLC-REGULAR';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./NEW_CODEPROLC-REGULAR.otf') format('otf'),
+}
+
+@font-face {
+  font-family: 'NEW_CODEPROLIGHT-LIGHT';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./NEW_CODEPROLIGHT-LIGHT.otf') format('otf'),
+}
