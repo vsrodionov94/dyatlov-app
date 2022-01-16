@@ -1,26 +1,31 @@
 @font-face {
-  font-family: 'CODE-PRO-BOLD';
-  src: url('../assets/fonts/CODE-PRO-BOLD.otf'),
+	font-family: CodeProBold;
+	src: url('../assets/fonts/Code-Pro-Bold.otf');
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'NEW_CODEPROBLACK-BLACK';
-  src: url('../assets/fonts/NEW_CODEPROBLACK-BLACK.otf'),
+	font-family: NewCodeProBlack;
+	src: url('../assets/fonts/New-Code-Pro-Black.otf');
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'NEW_CODEPROBOLD-NORMAL';
-  src: url('../assets/fonts/NEW_CODEPROBOLD-NORMAL.otf'),
+	font-family: NewCodeProBold;
+	src: url('../assets/fonts/New-Code-Pro-Bold.otf');
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'NEW_CODEPROLC-REGULAR';
-  src: url('../assets/fonts/NEW_CODEPROLC-REGULAR.otf'),
+	font-family: NewCodeProLc;
+	src: url('../assets/fonts/New-Code-Pro-Lc.otf');
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'NEW_CODEPROLIGHT-LIGHT';
-  src: url('../assets/fonts/NEW_CODEPROLIGHT-LIGHT.otf'),
+	font-family: NewCodeProLight;
+	src: url('../assets/fonts/New-Code-Pro-Light.otf');
+	font-style: normal;
 }
 
 * {

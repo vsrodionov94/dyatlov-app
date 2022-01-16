@@ -12,7 +12,7 @@ export default class Lock {
     const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
       color: '#fff',
       fontSize: '53px',
-      fontFamily: 'NEW_CODEPROLIGHT-LIGHT',
+      fontFamily: 'NewCodeProLc',
     };
     const { centerX, centerY, height } = this.scene.cameras.main;
     this.scene.add.sprite(0, 0, 'lock-bg').setOrigin(0);

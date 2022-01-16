@@ -20,7 +20,7 @@ export default class Stats {
     const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
       color: '#fff',
       fontSize: '53px',
-      fontFamily: 'NEW_CODEPROLIGHT-LIGHT',
+      fontFamily: 'NewCodeProLc',
     };
     const keyIcon = this.scene.add.sprite(this.x, this.y, 'keys-icon').setOrigin(0);
     const keyIconGeom = keyIcon.getBounds();

@@ -16,15 +16,15 @@ class Boot extends Phaser.Scene {
   public init(): void {
     console.log(this.scene.key)
     this.state = state;
-    this.fontsReady = true;
+    this.fontsReady = false;
     Webfont.load({
       custom: { families: [
-        'CODE-PRO-BOLD',
-        'NEW_CODEPROBLACK-BLACK',
-        'NEW_CODEPROBOLD-NORMAL',
-        'NEW_CODEPROLC-REGULAR',
-        'NEW_CODEPROLIGHT-LIGHT',
-      ] },
+      'CodeProBold', 
+      'NewCodeProBlack',
+      'NewCodeProBold',
+      'NewCodeProLc',
+      'NewCodeProLight',
+    ] },
       active: () => { this.fontsReady = true },
     });
     this.checkUser();

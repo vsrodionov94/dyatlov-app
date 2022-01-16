@@ -34,7 +34,7 @@ export default class FileAnswer {
     const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
       color: '#000',
       fontSize: '38px',
-      fontFamily: 'NEW_CODEPROLIGHT-LIGHT',
+      fontFamily: 'NewCodeProLc',
       wordWrap: { width: 500 }
     };
     const { centerX, centerY } = this.scene.cameras.main;
