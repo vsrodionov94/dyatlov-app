@@ -34,12 +34,13 @@ type CheckUserData = {
 
 type GetData = { vkId: number };
 type AnswerData = { vkId: number, answer: string };
-type AnswerUserData = {  vkId: number; foreignId: number; helped: string; };
+type AnswerUserData = {  vkId: number; foreignId: number; helped: boolean; };
 type UserData = {
   id: number;
   name: string;
   sex: string;
-  age: string | number;
+  age: string;
+  photo: string;
 };
 type RandomUserData = { error: boolean; tryCount: number; user: UserData; };
 type CheckKeyData = {

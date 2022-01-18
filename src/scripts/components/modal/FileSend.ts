@@ -1,33 +1,94 @@
 import Modal from '../../scenes/Modal';
 import Utils from '../../libs/Utils';
-import { ModalTypes } from '../../types';
+import { AnswerUserData, ModalTypes, RandomUserData, TrySendUserData } from '../../types';
+import api from '../../libs/Api';
+import { MAX_TRY_COUNT } from '../../constants';
+import { Data } from 'phaser';
 
 export default class FileSend {
   private scene: Modal;
+  private modalData: RandomUserData;
+
   constructor(scene: Modal) {
     this.scene = scene;
-    this.createElements();
-    this.createUserInfo();
+    this.modalData = this.scene.state.modalData as RandomUserData;
+    this.scene.add.sprite(0, 0, 'send-bg').setOrigin(0);
+    this.createZone();
+    if (this.modalData.user) {
+      this.createElements();
+      this.createUserInfo();
+    } else {
+      this.createPlaceHolder();
+    }
   }
   
   private createElements() {
-    const { centerX, centerY, height } = this.scene.cameras.main;
-    this.scene.add.sprite(0, 0, 'send-bg').setOrigin(0);
+    const { centerX, centerY } = this.scene.cameras.main;
     const helpBtn = this.scene.add.sprite(centerX - 445, centerY + 500, 'send-help-btn').setOrigin(0, 0.5);
     const skipBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30, centerY + 500, 'send-skip-btn').setOrigin(0, 0.5);
     const unhelpBtn = this.scene.add.sprite(skipBtn.getBounds().right + 30, centerY + 500, 'send-unhelp-btn').setOrigin(0, 0.5);
-    
-    const backBtn = this.scene.add.sprite(centerX - 50, height - 122, 'back-btn').setOrigin(0.5, 1);
-    Utils.click(backBtn, () => {
-      this.scene.scene.stop();
-      this.scene.mainScene.showBtns();
+
+    Utils.click(helpBtn, () => { this.onHelpClick();});
+    Utils.click(skipBtn, () => { this.onSkipClick();});
+    Utils.click(unhelpBtn, () => { this.onUnhelpClick();});
+  }
+
+  private onHelpClick(): void {
+    this.sendAnswer(true);
+  }
+
+  private onSkipClick(): void {
+    this.getNewUser();
+  }
+
+  private getNewUser(): void {
+    api.getRandomUser({ vkId: this.scene.state.vkId }).then(data => {
+      this.scene.state.modalData = data;
+      this.scene.state.modal = ModalTypes.FileSend;
+      this.scene.scene.restart(this.scene.state);
     });
+  }
+
+  private onUnhelpClick(): void {
+    this.sendAnswer(false);
+  }
+
+  private sendAnswer(answer: boolean): void {
+    const data: AnswerUserData = {
+      vkId: this.scene.state.vkId,
+      foreignId: this.modalData.user.id,
+      helped: answer,
+    };
+    api.trySendUser(data).then(data => {
+      if (!data.error) {
+        this.getNewUser();
+      }
+    });
+  }
+
+  private createZone(): void {
+    const { centerX, centerY } = this.scene.cameras.main;
 
     const zone = this.scene.add.zone(centerX + 230, centerY - 180, 480, 150).setDropZone(undefined, () => {});
     Utils.click(zone, () => {
-      this.scene.state.modal = ModalTypes.FileAnswer;
-      this.scene.scene.restart(this.scene.state);
+      api.getUserForAnswer({ vkId: this.scene.state.vkId }).then(data => {
+        this.scene.state.modalData = data;
+        this.scene.state.modal = ModalTypes.FileAnswer;
+        this.scene.scene.restart(this.scene.state);
+      });
     });
+  }
+
+  private createPlaceHolder(): void {
+    const str = Utils.checkTryCount(this.modalData.tryCount) ? 'у тебя больше нет попыток' : 'нет новых анкет';
+    const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
+      fontFamily: 'CodeProBold',
+      fontSize: '40px',
+      color: '#000000'
+    };
+    const { centerX, centerY } = this.scene.cameras.main;
+
+    this.scene.add.text(centerX, centerY + 120, str, textStyle).setOrigin(0.5);
   }
 
   private createUserInfo() {
@@ -37,17 +98,30 @@ export default class FileSend {
       fontFamily: 'NewCodeProLc',
       wordWrap: { width: 500 }
     };
-    const { centerX, centerY } = this.scene.cameras.main;
+    const { centerY } = this.scene.cameras.main;
 
+    const { name, sex, age, id, photo } = this.modalData.user;
     const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
+    const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
+    this.loadAvatarAsset({ id, photo }).then(() => {
+      this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`)
+        .setDisplaySize(avatar.displayWidth, avatar.displayHeight)
+        .setMask(mask);
+    });
     const avatarGeom = avatar.getBounds();
-    const nameStr = 'Констанция Константинопольская';
-    const name = this.scene.add.text(avatarGeom.right + 90, avatarGeom.centerY - 20, nameStr, textStyle).setOrigin(0, 0.5);
+    this.scene.add.text(avatarGeom.right + 90, avatarGeom.centerY - 20, name, textStyle).setOrigin(0, 0.5);
+    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom, sex, textStyle);
+    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom + 20, age, textStyle);
+  }
 
-    const sexStr = 'пол: женский'
-    const sex = this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom, sexStr, textStyle);
-
-    const ageStr = 'возраст: 46'
-    const age = this.scene.add.text(avatarGeom.right + 87, sex.getBounds().bottom, ageStr, textStyle);
+  private loadAvatarAsset(data: { id: number, photo: string }): Promise<boolean> {
+    return new Promise(resolve => {
+      const { id, photo } = data;
+      const key = `avatar-${id}`;
+      if (this.scene.textures.exists(key)) return resolve(true);
+      this.scene.load.image(key, photo);
+      this.scene.load.once(Phaser.Loader.Events.COMPLETE, () => resolve(true));
+      this.scene.load.start();
+    });
   }
 };
