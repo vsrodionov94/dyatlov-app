@@ -1,40 +1,5 @@
-type GetData = { vkId: number };
-type AnswerData = { vkId: number, answer: string };
-type AnswerUserData = {  vkId: number; foreignId: number; helped: string; };
-type UserData = {
-  id: number;
-  name: string;
-  sex: string;
-  age: string | number;
-};
-type RandomUserData = { error: boolean; tryCount: number; user: UserData; };
-type CheckKeyData = {
-  error: boolean;
-  tryCount: number;
-  currentDay: number;
-  hasKey: boolean;
-};
-type TryKeyData = {
-  error: boolean;
-  correctly: number;
-  keys: number;
-  tryCount: number;
-};
-type CheckAudioData = {
-  error: boolean;
-  tryCount: number;
-  currentDay: number;
-  hasAudio: boolean;
-};
-type TryAudioData = {
-  error: boolean;
-  correctly: number;
-  artifacts: number;
-  tryCount: number;
-};
-type UserForAnswerData = { error: boolean; tryCount: number; user: UserData; };
-type TrySendUserData = { error: boolean, tryCount: number };
-type TryAnswerUserData = { error: boolean; tryCount: number; artifacts: number; }
+import { AnswerData, AnswerUserData, CheckAudioData, CheckKeyData, GetData, RandomUserData, TryAnswerUserData, TryAudioData, TryKeyData, TrySendUserData, UserForAnswerData, CheckUserData } from "../types";
+
 
 class Api {
   private url: string;
@@ -52,7 +17,7 @@ class Api {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  public checkUser(data: GetData): Promise<string> {
+  public checkUser(data: GetData): Promise<CheckUserData> {
     return fetch(`${this.url}/checkUser`, {
       headers: this.headers,
       method: "POST",

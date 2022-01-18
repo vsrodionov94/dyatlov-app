@@ -1,6 +1,6 @@
 import Modal from '../../scenes/Modal';
 import Utils from '../../libs/Utils';
-import { modalTypes } from '../../types';
+import { ModalTypes } from '../../types';
 
 export default class FileSend {
   private scene: Modal;
@@ -25,7 +25,7 @@ export default class FileSend {
 
     const zone = this.scene.add.zone(centerX + 230, centerY - 180, 480, 150).setDropZone(undefined, () => {});
     Utils.click(zone, () => {
-      this.scene.state.modal = modalTypes.FileAnswer;
+      this.scene.state.modal = ModalTypes.FileAnswer;
       this.scene.scene.restart(this.scene.state);
     });
   }

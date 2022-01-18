@@ -1,4 +1,4 @@
-import { stateType } from "../types";
+import { StateType } from "../types";
 
 const startBg: string = require('../../assets/images/start-screen/bg.png');
 const startBtn: string = require('../../assets/images/start-screen/btn.png');
@@ -30,13 +30,13 @@ const avatar: string = require('../../assets/images/modal/avatar.png');
 const closeBtn: string = require('../../assets/images/faq/close-btn.png');
 
 class Preload extends Phaser.Scene {
-  public state: stateType;
+  public state: StateType;
   constructor() {
     super('Preload');
   }
 
 
-  public init(state: stateType): void {
+  public init(state: StateType): void {
     this.state = state;
     console.log(this.scene.key)
   }

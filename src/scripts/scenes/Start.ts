@@ -1,13 +1,13 @@
-import { stateType } from '../types';
+import { StateType } from '../types';
 import Utils from './../libs/Utils';
 
 export default class Start extends Phaser.Scene {
-  public state: stateType;
+  public state: StateType;
   constructor() {
     super('Start');
   }
 
-  public init(state: stateType): void {
+  public init(state: StateType): void {
     this.state = state;
     console.log(this.scene.key)
   }

@@ -1,6 +1,6 @@
-import { stateType } from "./types";
+import { StateType } from "./types";
 
-const state: stateType = {
+const state: StateType = {
   tutorial: true,
   vkId: 0,
   keys: 0,

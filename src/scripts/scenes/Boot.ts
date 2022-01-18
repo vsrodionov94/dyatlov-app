@@ -1,13 +1,13 @@
 import * as Webfont from '../libs/Webfonts.js';
 import bridge from '@vkontakte/vk-bridge';
-import { stateType } from '../types.js';
+import { StateType } from '../types.js';
 import state from '../state';
 import api from './../libs/Api';
 
 class Boot extends Phaser.Scene {
   private fontsReady: boolean;
   private userReady: boolean;
-  public state: stateType;
+  public state: StateType;
 
   constructor() {
     super('Boot');
