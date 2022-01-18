@@ -42,7 +42,7 @@ class Api {
   }
 
   public trySendUser(data: AnswerUserData): Promise<TrySendUserData> {
-    return fetch(`${this.url}/getRandomUser`, {
+    return fetch(`${this.url}/trySendUser`, {
       headers: this.headers,
       method: "POST",
       body: JSON.stringify(data),

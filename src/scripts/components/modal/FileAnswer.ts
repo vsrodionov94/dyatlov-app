@@ -54,6 +54,8 @@ export default class FileAnswer {
     };
     api.tryAnswerUser(data).then(data => {
       if (!data.error) {
+        this.scene.state.artifacts = data.artifacts;
+        this.scene.mainScene.stats.updateArtifacts(data.artifacts);
         this.getNextUser();
       }
     });
@@ -65,6 +67,7 @@ export default class FileAnswer {
     const zone = this.scene.add.zone(centerX - 230, centerY - 180, 480, 150).setDropZone(undefined, () => {});
     Utils.click(zone, () => {
       api.getRandomUser({ vkId: this.scene.state.vkId }).then(data => {
+        console.log('getRandom', data);
         this.scene.state.modalData = data;
         this.scene.state.modal = ModalTypes.FileSend;
         this.scene.scene.restart(this.scene.state);
@@ -97,14 +100,14 @@ export default class FileAnswer {
     const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
     const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
     this.loadAvatarAsset({ id, photo }).then(() => {
-      this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`)
-        .setDisplaySize(avatar.displayWidth, avatar.displayHeight)
-        .setMask(mask);
+      const sprite = this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`);
+      sprite.setDisplaySize(avatar.displayWidth, avatar.displayHeight)
+        .setMask(mask).setOrigin(0, 0.5);
     });
     const avatarGeom = avatar.getBounds();
     this.scene.add.text(avatarGeom.right + 90, avatarGeom.centerY - 20, name, textStyle).setOrigin(0, 0.5);
     this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom, sex, textStyle);
-    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom + 20, age, textStyle);
+    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom + 50, age, textStyle);
   }
 
   private loadAvatarAsset(data: { id: number, photo: string }): Promise<boolean> {

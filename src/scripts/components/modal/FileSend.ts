@@ -11,6 +11,7 @@ export default class FileSend {
 
   constructor(scene: Modal) {
     this.scene = scene;
+    console.log(this.scene.state.modalData);
     this.modalData = this.scene.state.modalData as RandomUserData;
     this.scene.add.sprite(0, 0, 'send-bg').setOrigin(0);
     this.createZone();
@@ -61,6 +62,7 @@ export default class FileSend {
     };
     api.trySendUser(data).then(data => {
       if (!data.error) {
+        this.modalData.tryCount = data.tryCount;
         this.getNewUser();
       }
     });
@@ -104,14 +106,14 @@ export default class FileSend {
     const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
     const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
     this.loadAvatarAsset({ id, photo }).then(() => {
-      this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`)
-        .setDisplaySize(avatar.displayWidth, avatar.displayHeight)
-        .setMask(mask);
+      const sprite = this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`);
+      sprite.setDisplaySize(avatar.displayWidth, avatar.displayHeight)
+        .setMask(mask).setOrigin(0, 0.5);
     });
     const avatarGeom = avatar.getBounds();
     this.scene.add.text(avatarGeom.right + 90, avatarGeom.centerY - 20, name, textStyle).setOrigin(0, 0.5);
     this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom, sex, textStyle);
-    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom + 20, age, textStyle);
+    this.scene.add.text(avatarGeom.right + 87, avatarGeom.bottom + 35, age, textStyle);
   }
 
   private loadAvatarAsset(data: { id: number, photo: string }): Promise<boolean> {
