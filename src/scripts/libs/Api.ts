@@ -100,7 +100,7 @@ class Api {
 }
 
 const api = new Api({
-  url: '',
+  url: process.env.API,
   headers: {
     "Content-type": "application/json",
   },

@@ -44,10 +44,13 @@ class Boot extends Phaser.Scene {
 
     // });
     this.state.vkId = 23755036;
-    this.userReady = true;
-    // api.checkUser({ vkId: this.state.vkId }).then(data => {
-    //   console.log(data);
-    // });
+    api.checkUser({ vkId: this.state.vkId }).then(data => {
+      this.state.artifacts = data.artifacts;
+      this.state.invites = data.inviteCount;
+      this.state.keys = data.keys;
+      this.state.tutorial = data.tutorial;
+      this.userReady = true;
+    });
   }
   
   public start(): void {

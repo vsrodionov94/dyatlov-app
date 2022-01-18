@@ -47,5 +47,5 @@ export default class Utils {
     btn.on('pointerout',() => { btn.setAlpha(1); });
   }
 
-  public static checkTryCount = (count: number): boolean => count > 0 && count < MAX_TRY_COUNT;
+  public static checkTryCount = (count: number): boolean => count > 0 && count >= MAX_TRY_COUNT;
 };

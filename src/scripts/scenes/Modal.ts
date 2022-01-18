@@ -21,7 +21,7 @@ export default class Modal extends Phaser.Scene {
   }
 
   public create(): void {
-    if (this.state.modalData = null) this.scene.stop();
+    if (this.state.modalData === null) this.scene.stop();
     this.createModalElements();
     this.createBackBtn();
   }
