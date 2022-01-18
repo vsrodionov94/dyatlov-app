@@ -4,6 +4,7 @@ import Main from './Main';
 import Radio from './../components/modal/Radio';
 import FileAnswer from './../components/modal/FileAnswer';
 import FileSend from './../components/modal/FileSend';
+import Utils from './../libs/Utils';
 
 export default class Modal extends Phaser.Scene {
   public state: StateType;
@@ -20,6 +21,12 @@ export default class Modal extends Phaser.Scene {
   }
 
   public create(): void {
+    if (this.state.modalData = null) this.scene.stop();
+    this.createModalElements();
+    this.createBackBtn();
+  }
+  
+  private createModalElements(): void {
     switch (this.state.modal) {
       case ModalTypes.Lock:
         new Lock(this);
@@ -37,5 +44,16 @@ export default class Modal extends Phaser.Scene {
         this.scene.stop();
         break;
     }
+  }
+
+
+  private createBackBtn(): void {
+    const { centerX, height } = this.cameras.main;
+    const backBtn = this.add.sprite(centerX - 50, height - 122, 'back-btn').setOrigin(0.5, 1);
+    Utils.click(backBtn, () => {
+      this.scene.stop();
+      this.mainScene.showBtns();
+      this.state.modalData = null;
+    });
   }
 };

@@ -1,3 +1,4 @@
+import { MAX_TRY_COUNT } from "../constants";
 
 export default class Utils {
   public static click(object: any, action: () => void, maxMoveCounter: number = 3): void {
@@ -45,4 +46,6 @@ export default class Utils {
     btn.on('pointerover',() => { btn.setAlpha(0.8); });
     btn.on('pointerout',() => { btn.setAlpha(1); });
   }
+
+  public static checkTryCount = (count: number): boolean => count > 0 && count < MAX_TRY_COUNT;
 };
