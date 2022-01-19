@@ -74,6 +74,7 @@ export default class Lock {
         if (data.correctly) {
           this.scene.state.keys = data.keys;
           this.scene.mainScene.stats.updateKeys(data.keys);
+          this.scene.stats.updateArtifacts(data.keys);
           this.updateState();
         } else {
           this.setUncorrectlyState();

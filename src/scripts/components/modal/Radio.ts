@@ -83,6 +83,7 @@ export default class Radio {
         if (data.correctly) {
           this.scene.state.artifacts = data.artifacts;
           this.scene.mainScene.stats.updateArtifacts(data.artifacts);
+          this.scene.stats.updateArtifacts(data.artifacts);
           this.updateState();
         } else {
           this.setUncorrectlyState();

@@ -56,6 +56,7 @@ export default class FileAnswer {
       if (!data.error) {
         this.scene.state.artifacts = data.artifacts;
         this.scene.mainScene.stats.updateArtifacts(data.artifacts);
+        this.scene.stats.updateArtifacts(data.artifacts);
         this.getNextUser();
       }
     });

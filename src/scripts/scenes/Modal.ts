@@ -5,20 +5,24 @@ import Radio from './../components/modal/Radio';
 import FileAnswer from './../components/modal/FileAnswer';
 import FileSend from './../components/modal/FileSend';
 import Utils from './../libs/Utils';
+import Stats from './../components/Stats';
 
 export default class Modal extends Phaser.Scene {
   public state: StateType;
   public mainScene: Main;
   public inputs: HTMLInputElement[] = [];
+  public stats: Stats;
 
   constructor() {
     super('Modal');
   }
 
   public init(state: StateType): void {
+    this.cameras.main.setBackgroundColor('#181818');
     this.state = state;
     console.log(this.scene.key);
     this.mainScene = this.scene.get('Main') as Main;
+    this.stats = new Stats(this);
   }
 
   public create(): void {
