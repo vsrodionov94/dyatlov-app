@@ -38,7 +38,8 @@ const day7: string = require('../../assets/sound/day-7.wav');
 const day8: string = require('../../assets/sound/day-8.wav');
 const day9: string = require('../../assets/sound/day-9.wav');
 const day10: string = require('../../assets/sound/day-10.wav');
-
+const circleRed: string = require('../../assets/images/faq/circle-red.png');
+const circle: string = require('../../assets/images/faq/circle.png');
 
 class Preload extends Phaser.Scene {
   public state: StateType;
@@ -83,6 +84,8 @@ class Preload extends Phaser.Scene {
     this.load.image('send-skip-btn', sendSkipBtn);
     this.load.image('avatar', avatar);
     this.load.image('close-btn', closeBtn);
+    this.load.image('circle-red', circleRed);
+    this.load.image('circle', circle);
     this.load.audio('day-0', day0);
     this.load.audio('day-1', day1);
     this.load.audio('day-2', day2);

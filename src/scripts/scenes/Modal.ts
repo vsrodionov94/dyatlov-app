@@ -12,6 +12,7 @@ export default class Modal extends Phaser.Scene {
   public mainScene: Main;
   public inputs: HTMLInputElement[] = [];
   public stats: Stats;
+  private faqBtn: Phaser.GameObjects.Sprite;
 
   constructor() {
     super('Modal');
@@ -29,6 +30,7 @@ export default class Modal extends Phaser.Scene {
     if (this.state.modalData === null) this.scene.stop();
     this.createModalElements();
     this.createBackBtn();
+    this.createFaqBtn();
   }
   
   private createModalElements(): void {
@@ -62,7 +64,28 @@ export default class Modal extends Phaser.Scene {
       this.inputs.forEach(el => {
         el?.blur();
         el?.remove();
-      })
+      });
+    });
+  }
+
+  private createFaqBtn(): void {
+    const { width, height } = this.cameras.main;
+    this.faqBtn = this.add.sprite(width - 61, height - 69, 'faq-btn').setOrigin(1);
+    let stage = 1;
+    switch (this.state.modal) {
+      case ModalTypes.Radio:
+        stage = 2;
+        break;
+      case ModalTypes.FileAnswer:
+      case ModalTypes.FileSend:
+        stage = 3;
+        break;
+    }
+    Utils.click(this.faqBtn, () => {
+      this.inputs.forEach(el => {
+        el?.blur();
+        this.scene.launch('Tutorial', { stage });
+      });
     });
   }
 };
