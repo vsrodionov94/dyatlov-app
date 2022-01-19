@@ -100,7 +100,9 @@ export default class FileAnswer {
     const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
     const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
     this.loadAvatarAsset({ id, photo }).then(() => {
-      const sprite = this.scene.add.sprite(avatar.x, avatar.y, `avatar-${id}`);
+      const key = `avatar-${id}`;
+      const texture = this.scene.textures.exists(key) ? key : 'avatar';
+      const sprite = this.scene.add.sprite(avatar.x, avatar.y, texture);
       sprite.setDisplaySize(avatar.displayWidth, avatar.displayHeight)
         .setMask(mask).setOrigin(0, 0.5);
     });

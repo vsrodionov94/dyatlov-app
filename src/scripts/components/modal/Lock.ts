@@ -110,13 +110,6 @@ export default class Lock {
       this.input.setVisible(false);
       this.sendBtn.setVisible(false);
       this.repeatBtn.setVisible(false);
-    } else if (this.modalData.tryCount < 0) {
-      const str = 'ТЫ ВВЕЛ\nВЕРНЫЙ КОД';
-      this.text.setText(str);
-      this.text.setVisible(true);
-      this.input.setVisible(false);
-      this.sendBtn.setVisible(false);
-      this.sendBtn.setVisible(false);
     } else {
       this.text.setVisible(false);
       this.input.setVisible(true);
