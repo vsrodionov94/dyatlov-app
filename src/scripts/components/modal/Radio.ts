@@ -25,12 +25,20 @@ export default class Radio {
     };
     const { centerX, centerY } = this.scene.cameras.main;
     this.scene.add.sprite(0, 0, 'lock-bg').setOrigin(0);
-    this.scene.add.sprite(centerX, centerY - 120, 'play-btn');
+    const playBtn = this.scene.add.sprite(centerX, centerY - 120, 'play-btn');
+    Utils.click(playBtn, () => { this.playSound(); });
     this.scene.add.text(centerX, centerY + 150, 'Ввести слово', textStyle).setOrigin(0.5);
     this.createForm();
 
     this.updateState();
   }
+
+  private playSound(): void {
+    if (!this.modalData.hasAudio) return;
+    const sound = this.scene.sound.add(`day-${this.modalData.currentDay}`, { volume: 1, loop: false });
+    sound.play();
+  }
+
 
   private createForm() {
     const { centerX, centerY } = this.scene.cameras.main;

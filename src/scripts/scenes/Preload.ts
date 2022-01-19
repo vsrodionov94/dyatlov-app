@@ -28,6 +28,15 @@ const sendUnhelpBtn: string = require('../../assets/images/modal/file-send-unhel
 const sendSkipBtn: string = require('../../assets/images/modal/file-send-skip-btn.png');
 const avatar: string = require('../../assets/images/modal/avatar.png');
 const closeBtn: string = require('../../assets/images/faq/close-btn.png');
+const day0: string = require('../../assets/sound/day-0.wav');
+const day1: string = require('../../assets/sound/day-1.wav');
+const day2: string = require('../../assets/sound/day-2.wav');
+const day3: string = require('../../assets/sound/day-3.wav');
+const day7: string = require('../../assets/sound/day-7.wav');
+const day8: string = require('../../assets/sound/day-8.wav');
+const day9: string = require('../../assets/sound/day-9.wav');
+const day10: string = require('../../assets/sound/day-10.wav');
+
 
 class Preload extends Phaser.Scene {
   public state: StateType;
@@ -70,6 +79,14 @@ class Preload extends Phaser.Scene {
     this.load.image('send-skip-btn', sendSkipBtn);
     this.load.image('avatar', avatar);
     this.load.image('close-btn', closeBtn);
+    this.load.audio('day-0', day0);
+    this.load.audio('day-1', day1);
+    this.load.audio('day-2', day2);
+    this.load.audio('day-3', day3);
+    this.load.audio('day-7', day7);
+    this.load.audio('day-8', day8);
+    this.load.audio('day-9', day9);
+    this.load.audio('day-10', day10);
   }
 
   public create(): void {
