@@ -37,7 +37,7 @@ export default class FileAnswer {
   private getNextUser(): void {
     api.getUserForAnswer({ vkId: this.scene.state.vkId }).then(data => {
       this.scene.state.modalData = data;
-      this.scene.state.modal = ModalTypes.FileSend;
+      this.scene.state.modal = ModalTypes.FileAnswer;
       this.scene.scene.restart(this.scene.state);
     });
   }
