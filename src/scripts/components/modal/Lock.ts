@@ -6,11 +6,12 @@ import api from './../../libs/Api';
 export default class Lock {
   private scene: Modal;
   private modalData: CheckKeyData;
-  private input: Phaser.GameObjects.Sprite;
+  private inputSprite: Phaser.GameObjects.Sprite;
   private sendBtn: Phaser.GameObjects.Sprite;
   private repeatBtn: Phaser.GameObjects.Sprite;
   private text: Phaser.GameObjects.Text;
   private bg: Phaser.GameObjects.TileSprite;
+  private input: HTMLInputElement;
 
   constructor(scene: Modal) {
     this.scene = scene;
@@ -43,12 +44,14 @@ export default class Lock {
       align: 'center',
       wordWrap: { width: 700 },
     };
-    this.input = this.scene.add.sprite(centerX, centerY + 250, 'lock-input').setVisible(false);
+    this.inputSprite = this.scene.add.sprite(centerX, centerY + 250, 'lock-input').setVisible(false);
     this.sendBtn = this.scene.add.sprite(centerX, centerY + 500, 'send-btn').setVisible(false);
     this.repeatBtn = this.scene.add.sprite(centerX, centerY + 500, 'repeat-btn').setVisible(false);
     this.text = this.scene.add.text(centerX, centerY + 250, '', textStyle).setOrigin(0.5, 0).setVisible(false);
 
-    Utils.click(this.input, () => { this.onInputClick(); });
+    this.createInput();
+
+    Utils.click(this.inputSprite, () => { this.onInputClick(); });
     Utils.click(this.sendBtn, () => { this.onSendClick(); });
     Utils.click(this.repeatBtn, () => { this.onRepeatClick(); });
   }
@@ -73,14 +76,14 @@ export default class Lock {
   private setUncorrectlyState(): void {
     this.repeatBtn.setVisible(true);
     this.sendBtn.setVisible(false);
-    this.input.setTint(0xff0000);
+    this.inputSprite.setTint(0xff0000);
     console.log(123)
   }
 
   private onRepeatClick(): void {
     this.repeatBtn.setVisible(false);
     this.sendBtn.setVisible(true);
-    this.input.setTint(0xffffff);
+    this.inputSprite.setTint(0xffffff);
   }
 
   private getData(): AnswerData {
@@ -93,30 +96,41 @@ export default class Lock {
 
   private onInputClick(): void {
     this.bg.setVisible(true);
+    this.input.style.display = 'block';
+    this.input.focus();
   }
 
   private onBackgroundClick(): void {
     this.bg.setVisible(false);
-
+    this.input.style.display = 'none';
+    this.input.blur();
   }
 
+  private createInput(): void {
+    const root: HTMLDivElement = document.querySelector('#root');
+    this.input = document.createElement('input');
+    root.append(this.input);
+    this.input.setAttribute("id", "lock");
+    this.input.setAttribute("autocomplete", "off");
+  }
+  
   private updateState(): void {
     if (!this.modalData.hasKey) {
       const str = 'ИЩИ КОДЫ\nВ ЭФИРЕ';
       this.text.setText(str);
       this.text.setVisible(true);
-      this.input.setVisible(false);
+      this.inputSprite.setVisible(false);
       this.sendBtn.setVisible(false);
     } else if (Utils.checkTryCount(this.modalData.tryCount)) {
       const str = 'У ТЕБЯ БОЛЬШЕ\nНЕТ ПОПЫТОК';
       this.text.setText(str);
       this.text.setVisible(true);
-      this.input.setVisible(false);
+      this.inputSprite.setVisible(false);
       this.sendBtn.setVisible(false);
       this.repeatBtn.setVisible(false);
     } else {
       this.text.setVisible(false);
-      this.input.setVisible(true);
+      this.inputSprite.setVisible(true);
       this.sendBtn.setVisible(true);
     }
   }
