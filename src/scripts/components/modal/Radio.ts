@@ -10,6 +10,7 @@ export default class Radio {
   private sendBtn: Phaser.GameObjects.Sprite;
   private repeatBtn: Phaser.GameObjects.Sprite;
   private text: Phaser.GameObjects.Text;
+  private bg: Phaser.GameObjects.TileSprite;
   
   constructor(scene: Modal) {
     this.scene = scene;
@@ -23,8 +24,11 @@ export default class Radio {
       fontSize: '53px',
       fontFamily: 'NewCodeProLc',
     };
-    const { centerX, centerY } = this.scene.cameras.main;
+    const { centerX, centerY, width, height } = this.scene.cameras.main;
     this.scene.add.sprite(0, 0, 'lock-bg').setOrigin(0);
+    this.bg = this.scene.add.tileSprite(0, 0, width, height, 'pixel').setOrigin(0).setVisible(false);
+    Utils.click(this.bg, () => this.onBackgroundClick());
+
     const playBtn = this.scene.add.sprite(centerX, centerY - 120, 'play-btn');
     Utils.click(playBtn, () => { this.playSound(); });
     this.scene.add.text(centerX, centerY + 150, 'Ввести слово', textStyle).setOrigin(0.5);
@@ -68,10 +72,10 @@ export default class Radio {
         if (data.correctly) {
           this.scene.state.artifacts = data.artifacts;
           this.scene.mainScene.stats.updateArtifacts(data.artifacts);
+          this.updateState();
         } else {
           this.setUncorrectlyState();
         }
-        this.updateState();
       }
     });
   }
@@ -98,11 +102,11 @@ export default class Radio {
   }
 
   private onInputClick(): void {
-
+    this.bg.setVisible(true);
   }
 
   private onBackgroundClick(): void {
-
+    this.bg.setVisible(false);
   }
 
   private updateState(): void {

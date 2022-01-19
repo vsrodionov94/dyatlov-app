@@ -10,6 +10,7 @@ export default class Lock {
   private sendBtn: Phaser.GameObjects.Sprite;
   private repeatBtn: Phaser.GameObjects.Sprite;
   private text: Phaser.GameObjects.Text;
+  private bg: Phaser.GameObjects.TileSprite;
 
   constructor(scene: Modal) {
     this.scene = scene;
@@ -23,8 +24,10 @@ export default class Lock {
       fontSize: '53px',
       fontFamily: 'NewCodeProLc',
     };
-    const { centerX, centerY } = this.scene.cameras.main;
+    const { centerX, centerY, width, height } = this.scene.cameras.main;
     this.scene.add.sprite(0, 0, 'lock-bg').setOrigin(0);
+    this.bg = this.scene.add.tileSprite(0, 0, width, height, 'pixel').setOrigin(0).setVisible(false);
+    Utils.click(this.bg, () => { this.onBackgroundClick(); });
     this.scene.add.sprite(centerX, centerY - 120, 'lock-btn');
     this.scene.add.text(centerX, centerY + 100, 'Ввод ключа', textStyle).setOrigin(0.5);
     this.createForm();
@@ -58,19 +61,19 @@ export default class Lock {
         if (data.correctly) {
           this.scene.state.keys = data.keys;
           this.scene.mainScene.stats.updateKeys(data.keys);
+          this.updateState();
         } else {
           this.setUncorrectlyState();
         }
-        this.updateState();
       }
     });
   }
 
 
   private setUncorrectlyState(): void {
-    this.input.setTint(0xff0000);
     this.repeatBtn.setVisible(true);
     this.sendBtn.setVisible(false);
+    this.input.setTint(0xff0000);
     console.log(123)
   }
 
@@ -89,10 +92,11 @@ export default class Lock {
   }
 
   private onInputClick(): void {
-
+    this.bg.setVisible(true);
   }
 
   private onBackgroundClick(): void {
+    this.bg.setVisible(false);
 
   }
 
