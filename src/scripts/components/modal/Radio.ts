@@ -6,12 +6,14 @@ import api from '../../libs/Api';
 export default class Radio {
   private scene: Modal;
   private modalData: CheckAudioData;
-  private input: Phaser.GameObjects.Sprite;
+  private inputSprite: Phaser.GameObjects.Sprite;
   private sendBtn: Phaser.GameObjects.Sprite;
   private repeatBtn: Phaser.GameObjects.Sprite;
   private text: Phaser.GameObjects.Text;
   private bg: Phaser.GameObjects.TileSprite;
-  
+  private input: HTMLInputElement;
+  private inputText: Phaser.GameObjects.Text;
+
   constructor(scene: Modal) {
     this.scene = scene;
     this.modalData = this.scene.state.modalData as CheckAudioData;
@@ -54,17 +56,26 @@ export default class Radio {
       wordWrap: { width: 700 },
     };
 
-    this.input = this.scene.add.sprite(centerX, centerY + 300, 'radio-input').setVisible(false);
+    const inputTextStyle: Phaser.Types.GameObjects.Text.TextStyle = {
+      color: '#000',
+      fontSize: '83px',
+      fontFamily: 'NewCodeProLc',
+      align: 'center',
+    };
+
+    this.inputSprite = this.scene.add.sprite(centerX, centerY + 300, 'radio-input').setVisible(false);
+    this.inputText = this.scene.add.text(this.inputSprite.x, this.inputSprite.y, '', inputTextStyle).setOrigin(0.5);
     this.sendBtn = this.scene.add.sprite(centerX, centerY + 500, 'send-btn').setVisible(false);
     this.repeatBtn = this.scene.add.sprite(centerX, centerY + 500, 'repeat-btn').setVisible(false);
     this.text = this.scene.add.text(centerX, centerY + 300, '', textStyle).setOrigin(0.5, 0).setVisible(false);
-
-    Utils.click(this.input, () => { this.onInputClick(); });
+    this.createInput();
+    Utils.click(this.inputSprite, () => { this.onInputClick(); });
     Utils.click(this.sendBtn, () => { this.onSendClick(); });
     Utils.click(this.repeatBtn, () => { this.onRepeatClick(); });
   }
 
   private onSendClick(): void {
+    this.onBackgroundClick();
     api.tryAnswerAudio(this.getData()).then(data => {
       console.log(data);
       if (!data.error) {
@@ -80,9 +91,17 @@ export default class Radio {
     });
   }
 
+  private createInput(): void {
+    const root: HTMLDivElement = document.querySelector('#root');
+    this.input = document.createElement('input');
+    root.append(this.input);
+    this.input.setAttribute("id", "radio");
+    this.input.setAttribute("autocomplete", "off");
+    this.scene.inputs.push(this.input);
+  }
 
   private setUncorrectlyState(): void {
-    this.input.setTint(0xff0000);
+    this.inputSprite.setTexture('radio-input-error');
     this.repeatBtn.setVisible(true);
     this.sendBtn.setVisible(false);
   }
@@ -90,23 +109,30 @@ export default class Radio {
   private onRepeatClick(): void {
     this.repeatBtn.setVisible(false);
     this.sendBtn.setVisible(true);
-    this.input.setTint(0xffffff);
+    this.inputSprite.setTexture('radio-input');
+    this.input.value = '';
+    this.onBackgroundClick();
+    this.updateState();
   }
 
   private getData(): AnswerData {
-    const input = '';
-    return {
-      vkId: this.scene.state.vkId,
-      answer: input,
-    };
+    const input = this.input.value.toUpperCase();
+    return { vkId: this.scene.state.vkId, answer: input };
   }
 
+  
   private onInputClick(): void {
     this.bg.setVisible(true);
+    this.input.style.display = 'block';
+    this.input.focus();
+    this.inputText.setVisible(false);
   }
 
   private onBackgroundClick(): void {
     this.bg.setVisible(false);
+    this.input.style.display = 'none';
+    this.input.blur();
+    this.inputText.setVisible(true).setText(this.input.value);
   }
 
   private updateState(): void {
@@ -114,25 +140,25 @@ export default class Radio {
       const str = 'ВОЗВРАЩАЙСЯ\nВ ДЕНЬ ЭФИРА';
       this.text.setText(str);
       this.text.setVisible(true);
-      this.input.setVisible(false);
+      this.inputSprite.setVisible(false);
       this.sendBtn.setVisible(false);
     } else if (Utils.checkTryCount(this.modalData.tryCount)) {
       const str = 'У ТЕБЯ БОЛЬШЕ\nНЕТ ПОПЫТОК';
       this.text.setText(str);
       this.text.setVisible(true);
-      this.input.setVisible(false);
+      this.inputSprite.setVisible(false);
       this.sendBtn.setVisible(false);
       this.repeatBtn.setVisible(false);
     } else if (this.modalData.tryCount < 0) {
       const str = 'ТЫ ВВЕЛ\nВЕРНОЕ СЛОВО';
       this.text.setText(str);
       this.text.setVisible(true);
-      this.input.setVisible(false);
+      this.inputSprite.setVisible(false);
       this.sendBtn.setVisible(false);
       this.sendBtn.setVisible(false);
     } else {
       this.text.setVisible(false);
-      this.input.setVisible(true);
+      this.inputSprite.setVisible(true);
       this.sendBtn.setVisible(true);
     }
   }

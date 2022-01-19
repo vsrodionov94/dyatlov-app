@@ -9,6 +9,7 @@ import Utils from './../libs/Utils';
 export default class Modal extends Phaser.Scene {
   public state: StateType;
   public mainScene: Main;
+  public inputs: HTMLInputElement[] = [];
 
   constructor() {
     super('Modal');
@@ -54,6 +55,10 @@ export default class Modal extends Phaser.Scene {
       this.scene.stop();
       this.mainScene.showBtns();
       this.state.modalData = null;
+      this.inputs.forEach(el => {
+        el?.blur();
+        el?.remove();
+      })
     });
   }
 };

@@ -12,6 +12,7 @@ export default class Lock {
   private text: Phaser.GameObjects.Text;
   private bg: Phaser.GameObjects.TileSprite;
   private input: HTMLInputElement;
+  private inputText: Phaser.GameObjects.Text;
 
   constructor(scene: Modal) {
     this.scene = scene;
@@ -44,7 +45,16 @@ export default class Lock {
       align: 'center',
       wordWrap: { width: 700 },
     };
+
+    const inputTextStyle: Phaser.Types.GameObjects.Text.TextStyle = {
+      color: '#000',
+      fontSize: '83px',
+      fontFamily: 'NewCodeProLc',
+      align: 'center',
+    };
+
     this.inputSprite = this.scene.add.sprite(centerX, centerY + 250, 'lock-input').setVisible(false);
+    this.inputText = this.scene.add.text(this.inputSprite.x, this.inputSprite.y, '', inputTextStyle).setOrigin(0.5);
     this.sendBtn = this.scene.add.sprite(centerX, centerY + 500, 'send-btn').setVisible(false);
     this.repeatBtn = this.scene.add.sprite(centerX, centerY + 500, 'repeat-btn').setVisible(false);
     this.text = this.scene.add.text(centerX, centerY + 250, '', textStyle).setOrigin(0.5, 0).setVisible(false);
@@ -58,9 +68,9 @@ export default class Lock {
 
   private onSendClick(): void {
     api.tryAnswerKey(this.getData()).then(data => {
-      console.log(data);
+      this.input.value = '';
       if (!data.error) {
-        this.modalData.tryCount = data.tryCount;
+      this.modalData.tryCount = data.tryCount;
         if (data.correctly) {
           this.scene.state.keys = data.keys;
           this.scene.mainScene.stats.updateKeys(data.keys);
@@ -76,34 +86,35 @@ export default class Lock {
   private setUncorrectlyState(): void {
     this.repeatBtn.setVisible(true);
     this.sendBtn.setVisible(false);
-    this.inputSprite.setTint(0xff0000);
-    console.log(123)
+    this.inputSprite.setTexture('lock-input-error');
   }
 
   private onRepeatClick(): void {
     this.repeatBtn.setVisible(false);
     this.sendBtn.setVisible(true);
-    this.inputSprite.setTint(0xffffff);
+    this.inputSprite.setTexture('lock-input');
+    this.input.value = '';
+    this.onBackgroundClick();  
+    this.updateState();
   }
 
   private getData(): AnswerData {
-    const input = '';
-    return {
-      vkId: this.scene.state.vkId,
-      answer: input,
-    };
+    const input = this.input.value;
+    return { vkId: this.scene.state.vkId, answer: input };
   }
 
   private onInputClick(): void {
     this.bg.setVisible(true);
     this.input.style.display = 'block';
     this.input.focus();
+    this.inputText.setVisible(false);
   }
 
   private onBackgroundClick(): void {
     this.bg.setVisible(false);
     this.input.style.display = 'none';
     this.input.blur();
+    this.inputText.setVisible(true).setText(this.input.value);
   }
 
   private createInput(): void {
@@ -112,6 +123,7 @@ export default class Lock {
     root.append(this.input);
     this.input.setAttribute("id", "lock");
     this.input.setAttribute("autocomplete", "off");
+    this.scene.inputs.push(this.input);
   }
   
   private updateState(): void {

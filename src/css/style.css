@@ -89,3 +89,26 @@ canvas {
   background: transparent;
   background: rgba(0, 0, 0, 0.5);
 }
+
+#radio {
+  display: none;
+  position: absolute;
+  width: 57%;
+  top: 62%;
+  left: 21%;
+  bottom: 31%;
+  z-index: 10;
+  border: none;
+  padding-left: 6px;
+  font-family: 'NewCodeProLc';
+  font-size: 200%;
+  letter-spacing: 200%;
+  color: '#974f00';
+  text-align: center;
+}
+
+#radio:focus {
+  border: none;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
+}
