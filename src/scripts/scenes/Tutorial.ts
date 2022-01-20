@@ -38,7 +38,7 @@ export default class Tutorial extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('rgba(0, 0, 0, 0.8)');
     this.add.tileSprite(0, 0, width, height, 'pixel').setOrigin(0).setInteractive();
 
-    const backBtn = this.add.sprite(centerX - 50, height - 122, 'close-btn').setOrigin(0.5, 1);
+    const backBtn = this.add.sprite(centerX - 50, height - 122 - 29, 'close-btn');
     Utils.clickButton(this, backBtn, () => { this.scene.stop(); });
     this.createText();
   }

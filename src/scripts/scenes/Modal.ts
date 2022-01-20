@@ -56,8 +56,8 @@ export default class Modal extends Phaser.Scene {
 
   private createBackBtn(): void {
     const { centerX, height } = this.cameras.main;
-    const backBtn = this.add.sprite(centerX - 50, height - 122, 'back-btn').setOrigin(0.5, 1);
-    Utils.click(backBtn, () => {
+    const backBtn = this.add.sprite(centerX - 50, height - 122 - 29, 'back-btn');
+    Utils.clickButton(this, backBtn, () => {
       this.scene.stop();
       this.mainScene.showBtns();
       this.state.modalData = null;
