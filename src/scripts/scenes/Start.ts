@@ -28,10 +28,20 @@ export default class Start extends Phaser.Scene {
   private checkUser(): void {
     if (this.startCheck) return;
     this.startCheck = true;
+    // api.checkUser({ vkId: this.state.vkId, hash: '' }).then(data => {
+    //   this.state.artifacts = data.artifacts;
+    //   this.state.invites = data.inviteCount;
+    //   this.state.keys = data.keys;
+    //   this.state.tutorial = data.tutorial;
+    //   this.scene.stop();
+    //   this.scene.start('Main', this.state);
+    // }).catch(e => { this.startCheck = false; });
     bridge.send("VKWebAppGetUserInfo").then(userInfo => {
       this.state.vkId = userInfo.id;
       const hash = location.hash;
-      api.checkUser({ vkId: this.state.vkId, hash: hash }).then(data => {
+      console.log(hash);
+      console.log(location);
+      api.checkUser({ vkId: this.state.vkId, ref: hash }).then(data => {
         this.state.artifacts = data.artifacts;
         this.state.invites = data.inviteCount;
         this.state.keys = data.keys;

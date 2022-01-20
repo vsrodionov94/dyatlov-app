@@ -10,7 +10,7 @@ import Stats from './../components/Stats';
 export default class Modal extends Phaser.Scene {
   public state: StateType;
   public mainScene: Main;
-  public inputs: Array<CustomInput | HTMLInputElement> = [];
+  public inputs: Array<CustomInput | HTMLInputElement>;
   public stats: Stats;
   private faqBtn: Phaser.GameObjects.Sprite;
 
@@ -19,6 +19,7 @@ export default class Modal extends Phaser.Scene {
   }
 
   public init(state: StateType): void {
+    this.inputs = [];
     this.cameras.main.setBackgroundColor('#181818');
     this.state = state;
     console.log(this.scene.key);

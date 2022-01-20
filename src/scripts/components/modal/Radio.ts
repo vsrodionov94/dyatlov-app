@@ -155,6 +155,7 @@ export default class Radio {
       this.text.setText(str);
       this.text.setVisible(true);
       this.inputSprite.setVisible(false);
+      this.inputText.setVisible(false);
       this.sendBtn.setVisible(false);
       this.sendBtn.setVisible(false);
     } else {

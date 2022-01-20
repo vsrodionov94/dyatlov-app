@@ -104,13 +104,14 @@ export default class FileSend {
 
     const { name, sex, age, id, photo } = this.modalData.user;
     const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
-    const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
     this.loadAvatarAsset({ id, photo }).then(() => {
       const key = `avatar-${id}`;
       const texture = this.scene.textures.exists(key) ? key : 'avatar';
       const sprite = this.scene.add.sprite(avatar.x, avatar.y, texture);
-      sprite.setDisplaySize(avatar.displayWidth, avatar.displayHeight)
-        .setMask(mask).setOrigin(0, 0.5);
+      const halfWidth = avatar.displayWidth / 2
+      const circle = this.scene.add.graphics({ x: avatar.x + halfWidth, y: avatar.y }).fillCircle(0, 0, halfWidth).setVisible(false);
+      const mask = new Phaser.Display.Masks.GeometryMask(this.scene, circle);
+      sprite.setDisplaySize(avatar.displayWidth, avatar.displayHeight).setOrigin(0, 0.5).setMask(mask);
     });
     const avatarGeom = avatar.getBounds();
     this.scene.add.text(avatarGeom.right + 90, avatarGeom.centerY - 20, name, textStyle).setOrigin(0, 0.5);

@@ -147,10 +147,8 @@ export default class Lock {
         if (data.correctly) {
           this.scene.state.keys = data.keys;
           this.scene.mainScene.stats.updateKeys(data.keys);
-          this.scene.stats.updateArtifacts(data.keys);
-          this.scene.inputs.forEach((el: CustomInput) => {
-            el?.clearInput();
-          });
+          this.scene.stats.updateKeys(data.keys);
+          this.scene.inputs.forEach((el: CustomInput) => { el?.clearInput(); });
           this.updateState();
         } else {
           this.setUncorrectlyState();
