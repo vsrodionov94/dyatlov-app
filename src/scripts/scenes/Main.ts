@@ -52,7 +52,6 @@ export default class Main extends Phaser.Scene {
     this.hideBtns();
 
     api.checkKey(this.getData).then(data => {
-      console.log
       if (!data.error) this.openModal(data, ModalTypes.Lock);
       else this.showBtns();
     }).catch(() => {
@@ -88,8 +87,6 @@ export default class Main extends Phaser.Scene {
 
   private openModal(data: ModalData, type: ModalTypes): void {
     this.state.modalData = data;
-    console.log(this.state.modalData);
-    console.log(data);
     this.state.modal = type;
     this.scene.launch('Modal', this.state);
   }

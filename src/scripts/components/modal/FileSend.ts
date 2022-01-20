@@ -11,7 +11,6 @@ export default class FileSend {
 
   constructor(scene: Modal) {
     this.scene = scene;
-    console.log(this.scene.state.modalData);
     this.modalData = this.scene.state.modalData as RandomUserData;
     this.scene.add.sprite(0, 0, 'send-bg').setOrigin(0);
     this.createZone();

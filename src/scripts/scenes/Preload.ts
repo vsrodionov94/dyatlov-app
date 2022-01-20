@@ -51,7 +51,6 @@ class Preload extends Phaser.Scene {
 
   public init(state: StateType): void {
     this.state = state;
-    console.log(this.scene.key)
   }
 
   public preload(): void {

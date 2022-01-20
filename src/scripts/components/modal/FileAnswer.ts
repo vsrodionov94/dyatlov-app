@@ -68,7 +68,6 @@ export default class FileAnswer {
     const zone = this.scene.add.zone(centerX - 230, centerY - 180, 480, 150).setDropZone(undefined, () => {});
     Utils.click(zone, () => {
       api.getRandomUser({ vkId: this.scene.state.vkId }).then(data => {
-        console.log('getRandom', data);
         this.scene.state.modalData = data;
         this.scene.state.modal = ModalTypes.FileSend;
         this.scene.scene.restart(this.scene.state);

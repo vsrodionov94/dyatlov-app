@@ -22,7 +22,6 @@ export default class Modal extends Phaser.Scene {
     this.inputs = [];
     this.cameras.main.setBackgroundColor('#181818');
     this.state = state;
-    console.log(this.scene.key);
     this.mainScene = this.scene.get('Main') as Main;
     this.stats = new Stats(this);
   }

@@ -80,7 +80,6 @@ export default class Radio {
     if (this.input.value.length === 0) return;
     this.onBackgroundClick();
     api.tryAnswerAudio(this.getData()).then(data => {
-      console.log(data);
       if (!data.error) {
         this.modalData.tryCount = data.tryCount;
         if (data.correctly) {

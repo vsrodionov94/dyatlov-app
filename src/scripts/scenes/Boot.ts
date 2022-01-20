@@ -5,7 +5,6 @@ import bridge from '@vkontakte/vk-bridge';
 
 class Boot extends Phaser.Scene {
   private fontsReady: boolean;
-  private userReady: boolean;
   public state: StateType;
 
   constructor() {
@@ -13,7 +12,6 @@ class Boot extends Phaser.Scene {
   }
 
   public init(): void {
-    console.log(this.scene.key)
     this.state = state;
     this.fontsReady = false;
     bridge.send('VKWebAppInit');
