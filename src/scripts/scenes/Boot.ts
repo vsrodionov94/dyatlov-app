@@ -1,8 +1,7 @@
 import * as Webfont from '../libs/Webfonts.js';
-import bridge from '@vkontakte/vk-bridge';
 import { StateType } from '../types.js';
 import state from '../state';
-import api from './../libs/Api';
+import bridge from '@vkontakte/vk-bridge';
 
 class Boot extends Phaser.Scene {
   private fontsReady: boolean;
@@ -17,6 +16,7 @@ class Boot extends Phaser.Scene {
     console.log(this.scene.key)
     this.state = state;
     this.fontsReady = false;
+    bridge.send('VKWebAppInit');
     Webfont.load({
       custom: { families: [
       'CodeProBold', 
@@ -27,30 +27,14 @@ class Boot extends Phaser.Scene {
     ] },
       active: () => { this.fontsReady = true },
     });
-    this.checkUser();
   }
   
 
   public update(): void {
-    if (this.fontsReady && this.userReady) {
+    if (this.fontsReady) {
       this.fontsReady = false;
       this.start();
     }
-  }
-
-  private checkUser(): void {
-    // bridge.send('VKWebAppInit');
-    // bridge.send("VKWebAppGetUserInfo").then(userInfo => {
-
-    // });
-    this.state.vkId = 23755015;
-    api.checkUser({ vkId: this.state.vkId }).then(data => {
-      this.state.artifacts = data.artifacts;
-      this.state.invites = data.inviteCount;
-      this.state.keys = data.keys;
-      this.state.tutorial = data.tutorial;
-      this.userReady = true;
-    });
   }
   
   public start(): void {

@@ -1,8 +1,12 @@
 import { StateType } from '../types';
 import Utils from './../libs/Utils';
+import bridge from '@vkontakte/vk-bridge';
+import api from './../libs/Api';
 
 export default class Start extends Phaser.Scene {
   public state: StateType;
+  private startCheck: boolean;
+
   constructor() {
     super('Start');
   }
@@ -17,11 +21,24 @@ export default class Start extends Phaser.Scene {
     const bgTexture = 'start-bg';
     this.add.sprite(centerX, 0, bgTexture).setOrigin(0.5, 0);
     const btn = this.add.sprite(centerX, centerY + 300, 'start-btn').setInteractive();
-    const action = () => {
-      this.scene.stop();
-      this.scene.start('Main', this.state);
-    }
     Utils.setHoverEffect(btn);
-    Utils.click(btn, () => { action(); });
+    Utils.click(btn, () => { this.checkUser(); });
+  }
+
+  private checkUser(): void {
+    if (this.startCheck) return;
+    this.startCheck = true;
+    bridge.send("VKWebAppGetUserInfo").then(userInfo => {
+      this.state.vkId = userInfo.id;
+      const hash = location.hash;
+      api.checkUser({ vkId: this.state.vkId, hash: hash }).then(data => {
+        this.state.artifacts = data.artifacts;
+        this.state.invites = data.inviteCount;
+        this.state.keys = data.keys;
+        this.state.tutorial = data.tutorial;
+        this.scene.stop();
+        this.scene.start('Main', this.state);
+      }).catch(e => { this.startCheck = false; });
+    }).catch(e => { this.startCheck = false; });
   }
 };

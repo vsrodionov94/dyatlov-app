@@ -32,7 +32,7 @@ type CheckUserData = {
   inviteCount: number;
 };
 
-type GetData = { vkId: number };
+type GetData = { vkId: number, hash?: string };
 type AnswerData = { vkId: number, answer: string };
 type AnswerUserData = {  vkId: number; foreignId: number; helped: boolean; };
 type UserData = {

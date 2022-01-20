@@ -1,5 +1,7 @@
 import Main from './../scenes/Main';
 import Modal from './../scenes/Modal';
+import Utils from './../libs/Utils';
+import bridge from '@vkontakte/vk-bridge';
 
 export default class Stats {
   private keysCount: Phaser.GameObjects.Text;
@@ -34,6 +36,10 @@ export default class Stats {
     const inviteIconGeom = inviteIcon.getBounds();
     const inviteStr = `${this.scene.state.invites} / 3`
     this.inviteCount = this.scene.add.text(inviteIconGeom.right + 30, inviteIconGeom.centerY, inviteStr, textStyle).setOrigin(0, 0.5).setDepth(2);
+
+    Utils.click(inviteIcon, () => {
+      bridge.send("VKWebAppShare", {"link": `vk.com/app8055103#${this.scene.state.vkId}`});
+    });
   }
 
   public updateKeys(keys: number): void {
