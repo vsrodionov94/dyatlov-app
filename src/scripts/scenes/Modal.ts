@@ -1,5 +1,5 @@
 import { StateType, ModalTypes } from "../types";
-import Lock from './../components/modal/Lock';
+import Lock, { CustomInput } from './../components/modal/Lock';
 import Main from './Main';
 import Radio from './../components/modal/Radio';
 import FileAnswer from './../components/modal/FileAnswer';
@@ -10,7 +10,7 @@ import Stats from './../components/Stats';
 export default class Modal extends Phaser.Scene {
   public state: StateType;
   public mainScene: Main;
-  public inputs: HTMLInputElement[] = [];
+  public inputs: Array<CustomInput | HTMLInputElement> = [];
   public stats: Stats;
   private faqBtn: Phaser.GameObjects.Sprite;
 

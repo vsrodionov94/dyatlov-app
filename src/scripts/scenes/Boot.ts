@@ -43,7 +43,7 @@ class Boot extends Phaser.Scene {
     // bridge.send("VKWebAppGetUserInfo").then(userInfo => {
 
     // });
-    this.state.vkId = 23755013;
+    this.state.vkId = 23755015;
     api.checkUser({ vkId: this.state.vkId }).then(data => {
       this.state.artifacts = data.artifacts;
       this.state.invites = data.inviteCount;

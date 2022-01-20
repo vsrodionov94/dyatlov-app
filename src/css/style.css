@@ -68,38 +68,63 @@ canvas {
   height: 100%;
 }
 
-#lock {
+
+.lock {
   display: none;
   position: absolute;
-  width: 59%;
-  top: 59%;
-  left: 20%;
-  bottom: 33%;
+  width: 8.5%;
+  top: 59.5%;
+  left: 21%;
+  bottom: 33.5%;
   z-index: 10;
   border: none;
-  padding-left: 6px;
   font-family: 'NewCodeProLc';
   font-size: 200%;
-  letter-spacing: 200%;
   color: '#974f00';
+  text-align: center;
+  background-color: transparent;
 }
+
+#lock-1 {
+  left: 21%;
+}
+
+#lock-2 {
+  left: 31%;
+}
+
+#lock-3 {
+  left: 41%;
+}
+
+#lock-4 {
+  left: 51%;
+}
+
+#lock-5 {
+  left: 61%;
+}
+
+#lock-6 {
+  left: 71%;
+}
+
 
 #lock:focus {
   border: none;
   background: transparent;
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
 }
 
 #radio {
   display: none;
   position: absolute;
-  width: 57%;
+  width: 59%;
   top: 62%;
-  left: 21%;
+  left: 20.5%;
   bottom: 31%;
   z-index: 10;
   border: none;
-  padding-left: 6px;
   font-family: 'NewCodeProLc';
   font-size: 200%;
   letter-spacing: 200%;
@@ -110,5 +135,4 @@ canvas {
 #radio:focus {
   border: none;
   background: transparent;
-  background: rgba(0, 0, 0, 0.5);
 }
