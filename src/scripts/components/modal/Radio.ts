@@ -13,6 +13,7 @@ export default class Radio {
   private bg: Phaser.GameObjects.TileSprite;
   private input: HTMLInputElement;
   private inputText: Phaser.GameObjects.Text;
+  private sound: Phaser.Sound.BaseSound;
 
   constructor(scene: Modal) {
     this.scene = scene;
@@ -31,8 +32,9 @@ export default class Radio {
     this.bg = this.scene.add.tileSprite(0, 0, width, height, 'pixel').setOrigin(0).setVisible(false);
     Utils.click(this.bg, () => this.onBackgroundClick());
 
-    const playBtn = this.scene.add.sprite(centerX, centerY - 120, 'play-btn');
-    Utils.click(playBtn, () => { this.playSound(); });
+    this.scene.add.sprite(centerX, centerY + 15, 'wave');
+    const playBtn = this.scene.add.sprite(centerX, centerY - 170, 'play-btn').setDepth(1);
+    Utils.clickButton(this.scene, playBtn, () => { this.playSound(); });
     this.scene.add.text(centerX, centerY + 150, 'Ввести слово', textStyle).setOrigin(0.5);
     this.createForm();
 
@@ -40,9 +42,9 @@ export default class Radio {
   }
 
   private playSound(): void {
-    if (!this.modalData.hasAudio) return;
-    const sound = this.scene.sound.add(`day-${this.modalData.currentDay}`, { volume: 1, loop: false });
-    sound.play();
+    if (!this.modalData.hasAudio || this.sound?.isPlaying) return;
+    this.sound = this.scene.sound.add(`day-${this.modalData.currentDay}`, { volume: 1, loop: false });
+    this.sound.play();
   }
 
 
@@ -70,11 +72,12 @@ export default class Radio {
     this.text = this.scene.add.text(centerX, centerY + 300, '', textStyle).setOrigin(0.5, 0).setVisible(false);
     this.createInput();
     Utils.click(this.inputSprite, () => { this.onInputClick(); });
-    Utils.click(this.sendBtn, () => { this.onSendClick(); });
-    Utils.click(this.repeatBtn, () => { this.onRepeatClick(); });
+    Utils.clickButton(this.scene, this.sendBtn, () => { this.onSendClick(); });
+    Utils.clickButton(this.scene, this.repeatBtn, () => { this.onRepeatClick(); });
   }
 
   private onSendClick(): void {
+    if (this.input.value.length === 0) return;
     this.onBackgroundClick();
     api.tryAnswerAudio(this.getData()).then(data => {
       console.log(data);

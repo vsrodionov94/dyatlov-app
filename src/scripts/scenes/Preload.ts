@@ -21,6 +21,7 @@ const sendBtn: string = require('../../assets/images/modal/send-btn.png');
 const repeatBtn: string = require('../../assets/images/modal/repeat-btn.png');
 const backBtn: string = require('../../assets/images/modal/back-btn.png');
 const playBtn: string = require('../../assets/images/modal/play-btn.png');
+const wave: string = require('../../assets/images/modal/wave.png');
 const answerBg: string = require('../../assets/images/modal/file-answer-bg.png');
 const answerHelpBtn: string = require('../../assets/images/modal/file-answer-help-btn.png');
 const answerUnhelpBtn: string = require('../../assets/images/modal/file-answer-unhelp-btn.png');
@@ -75,6 +76,7 @@ class Preload extends Phaser.Scene {
     this.load.image('repeat-btn', repeatBtn);
     this.load.image('back-btn', backBtn);
     this.load.image('play-btn', playBtn);
+    this.load.image('wave', wave);
     this.load.image('answer-bg', answerBg);
     this.load.image('answer-help-btn', answerHelpBtn);
     this.load.image('answer-unhelp-btn', answerUnhelpBtn);

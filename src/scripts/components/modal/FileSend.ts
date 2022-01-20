@@ -29,9 +29,9 @@ export default class FileSend {
     const skipBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30, centerY + 500, 'send-skip-btn').setOrigin(0, 0.5);
     const unhelpBtn = this.scene.add.sprite(skipBtn.getBounds().right + 30, centerY + 500, 'send-unhelp-btn').setOrigin(0, 0.5);
 
-    Utils.click(helpBtn, () => { this.onHelpClick();});
-    Utils.click(skipBtn, () => { this.onSkipClick();});
-    Utils.click(unhelpBtn, () => { this.onUnhelpClick();});
+    Utils.clickButton(this.scene, helpBtn, () => { this.onHelpClick();});
+    Utils.clickButton(this.scene, skipBtn, () => { this.onSkipClick();});
+    Utils.clickButton(this.scene, unhelpBtn, () => { this.onUnhelpClick();});
   }
 
   private onHelpClick(): void {

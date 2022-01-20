@@ -65,13 +65,14 @@ export default class Modal extends Phaser.Scene {
       this.inputs.forEach(el => {
         el?.blur();
         el?.remove();
+        this.sound.stopAll();
       });
     });
   }
 
   private createFaqBtn(): void {
     const { width, height } = this.cameras.main;
-    this.faqBtn = this.add.sprite(width - 61, height - 69, 'faq-btn').setOrigin(1);
+    this.faqBtn = this.add.sprite(width - 132, height - 140, 'faq-btn');
     let stage = 1;
     switch (this.state.modal) {
       case ModalTypes.Radio:
@@ -82,7 +83,7 @@ export default class Modal extends Phaser.Scene {
         stage = 3;
         break;
     }
-    Utils.click(this.faqBtn, () => {
+    Utils.clickButton(this, this.faqBtn, () => {
       this.inputs.forEach(el => {
         el?.blur();
         this.scene.launch('Tutorial', { stage });

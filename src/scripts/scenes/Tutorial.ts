@@ -39,7 +39,7 @@ export default class Tutorial extends Phaser.Scene {
     this.add.tileSprite(0, 0, width, height, 'pixel').setOrigin(0).setInteractive();
 
     const backBtn = this.add.sprite(centerX - 50, height - 122, 'close-btn').setOrigin(0.5, 1);
-    Utils.click(backBtn, () => { this.scene.stop(); });
+    Utils.clickButton(this, backBtn, () => { this.scene.stop(); });
     this.createText();
   }
 

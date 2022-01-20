@@ -21,14 +21,13 @@ export default class Start extends Phaser.Scene {
     const bgTexture = 'start-bg';
     this.add.sprite(centerX, 0, bgTexture).setOrigin(0.5, 0);
     const btn = this.add.sprite(centerX, centerY + 300, 'start-btn').setInteractive();
-    Utils.setHoverEffect(btn);
-    Utils.click(btn, () => { this.checkUser(); });
+    Utils.clickButton(this, btn, () => { this.checkUser(); });
   }
 
   private checkUser(): void {
     if (this.startCheck) return;
     this.startCheck = true;
-    // api.checkUser({ vkId: this.state.vkId, hash: '' }).then(data => {
+    // api.checkUser({ vkId: this.state.vkId, ref: '' }).then(data => {
     //   this.state.artifacts = data.artifacts;
     //   this.state.invites = data.inviteCount;
     //   this.state.keys = data.keys;

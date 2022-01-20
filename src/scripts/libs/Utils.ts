@@ -42,6 +42,54 @@ export default class Utils {
     });
   }
 
+  public static clickButton(scene: Phaser.Scene, button: any, action: () => void): void {
+    button.setInteractive();
+    button.on('pointerdown', (): void => {
+    
+      button.press = true;
+      button.increase = false;
+      let counter: number = 0;
+      let interval = scene.time.addEvent({ delay: 5, callback: () => {
+        if (button.scale > 0.85 && !button.increase) {
+          let scale: number = button.scale - 0.1;
+          button.scale = Number(scale.toFixed(2));
+        }
+        counter++;
+        if (counter >= 2) interval.remove(false);
+      }, callbackScope: scene, loop: true });
+    });
+  
+    button.on('pointerout', (): void => {
+      if (button.press) {
+        button.press = false;
+        button.increase = true;
+        let interval = scene.time.addEvent({ delay: 10, callback: () => {
+          if (button.scale < 1 && button.increase) {
+            let scale: number = button.scale + 0.05;
+            button.scale = Number(scale.toFixed(2));
+          }
+          if (button.scale >= 1) interval.remove(false);
+        }, callbackScope: scene, loop: true });
+      }
+    });
+  
+    button.on('pointerup', (): void => {
+      if (button.press) {
+        button.press = false;
+        button.increase = true;
+        let interval = scene.time.addEvent({ delay: 10, callback: () => {
+          if (button.scale < 1 && button.increase) {
+            let scale: number = button.scale + 0.05;
+            button.scale = Number(scale.toFixed(2));
+          }
+          if (button.scale >= 1) interval.remove(false);
+        }, callbackScope: scene, loop: true });
+        action();
+      }
+    });
+    
+  }
+
   public static setHoverEffect(btn: Phaser.GameObjects.Sprite): void {
     btn.on('pointerover',() => { btn.setAlpha(0.8); });
     btn.on('pointerout',() => { btn.setAlpha(1); });

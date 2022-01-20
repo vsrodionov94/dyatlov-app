@@ -136,11 +136,12 @@ export default class Lock {
 
     this.createInput();
 
-    Utils.click(this.sendBtn, () => { this.onSendClick(); });
-    Utils.click(this.repeatBtn, () => { this.onRepeatClick(); });
+    Utils.clickButton(this.scene, this.sendBtn, () => { this.onSendClick(); });
+    Utils.clickButton(this.scene, this.repeatBtn, () => { this.onRepeatClick(); });
   }
 
   private onSendClick(): void {
+    if (!this.checkInputs()) return;
     api.tryAnswerKey(this.getData()).then(data => {
       if (!data.error) {
       this.modalData.tryCount = data.tryCount;
@@ -157,6 +158,9 @@ export default class Lock {
     });
   }
 
+  private checkInputs(): boolean {
+    return this.scene.inputs.every(el => el.value.length > 0);
+  }
 
   private setUncorrectlyState(): void {
     this.repeatBtn.setVisible(true);

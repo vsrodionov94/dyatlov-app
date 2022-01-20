@@ -34,10 +34,10 @@ export default class Main extends Phaser.Scene {
   }
 
   private setListeners(): void {
-    Utils.click(this.lockBtn, () => { this.onLockClick(); });
-    Utils.click(this.radioBtn, () => { this.onRadioClick(); });
-    Utils.click(this.fileBtn, () => { this.onFileClick(); });
-    Utils.click(this.faqBtn, () => { this.onFaqClick(); });
+    Utils.clickButton(this, this.lockBtn, () => { this.onLockClick(); });
+    Utils.clickButton(this, this.radioBtn, () => { this.onRadioClick(); });
+    Utils.clickButton(this, this.fileBtn, () => { this.onFileClick(); });
+    Utils.clickButton(this, this.faqBtn, () => { this.onFaqClick(); });
   }
 
   private createButtons(): void {
@@ -45,7 +45,7 @@ export default class Main extends Phaser.Scene {
     this.lockBtn = this.add.sprite(centerX + 260, centerY - 200, 'lock-btn');
     this.fileBtn = this.add.sprite(centerX - 260, centerY + 80, 'file-btn');
     this.radioBtn = this.add.sprite(centerX + 200, centerY + 400, 'radio-btn');
-    this.faqBtn = this.add.sprite(width - 61, height - 69, 'faq-btn').setOrigin(1);
+    this.faqBtn = this.add.sprite(width - 132, height - 140, 'faq-btn');
   }
 
   private onLockClick(): void {
