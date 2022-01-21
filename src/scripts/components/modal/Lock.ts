@@ -7,15 +7,13 @@ export class CustomInput {
   private text: Phaser.GameObjects.Text;
   private sprite: Phaser.GameObjects.Sprite;
   private input: HTMLInputElement;
-  private id: number;
   private x: number;
   private y: number;
   private scene: Phaser.Scene;
   private bg: Phaser.GameObjects.TileSprite;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, id: number, bg: Phaser.GameObjects.TileSprite) {
+  constructor(scene: Phaser.Scene, x: number, y: number, bg: Phaser.GameObjects.TileSprite) {
     this.scene = scene;
-    this.id = id;
     this.x = x;
     this.y = y;
     this.bg = bg;
@@ -29,7 +27,7 @@ export class CustomInput {
       fontFamily: 'NewCodeProLc',
       align: 'center',
     };
-    this.sprite = this.scene.add.sprite(this.x, this.y, 'lock-input').setOrigin(0, 0.5);
+    this.sprite = this.scene.add.sprite(this.x, this.y, 'radio-input').setOrigin(0.5);
     const spriteGeom = this.sprite.getBounds();
     this.text = this.scene.add.text(spriteGeom.centerX, spriteGeom.centerY, '', textStyle).setOrigin(0.5);
     Utils.click(this.sprite, () => { this.onClick(); });
@@ -40,10 +38,15 @@ export class CustomInput {
     const root: HTMLDivElement = document.querySelector('#root');
     this.input = document.createElement('input');
     root.append(this.input);
-    this.input.className = 'lock';
-    this.input.setAttribute("id", `lock-${this.id}`);
+    this.input.setAttribute("id", 'lock');
     this.input.setAttribute("autocomplete", "off");
-    this.input.setAttribute("maxlength", "1");
+    this.input.setAttribute("maxlength", "6");
+    this.input.oninput = (e: InputEvent) => {
+      const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+      if (e.data && !digits.some(el => el === e.data)) {
+        this.input.value = this.input.value.slice(0, -1);
+      }
+    }
   }
 
   private onClick(): void {
@@ -59,11 +62,11 @@ export class CustomInput {
   }
 
   public setError(): void {
-    this.sprite?.setTexture('lock-input-error');
+    this.sprite?.setTexture('radio-input-error');
   }
   
   public clearError(): void {
-    this.sprite?.setTexture('lock-input');
+    this.sprite?.setTexture('radio-input');
     this.clearInput();
   }
 
@@ -159,7 +162,7 @@ export default class Lock {
   }
 
   private checkInputs(): boolean {
-    return this.scene.inputs.every(el => el.value.length > 0);
+    return this.scene.inputs.every(el => el.value.length === 6);
   }
 
   private setUncorrectlyState(): void {
@@ -192,15 +195,9 @@ export default class Lock {
   private createInput(): void {
     const { centerX, centerY } = this.scene.cameras.main;
     const inputY = centerY + 250;
-    const width = 96;
-    const offestX = 12;
-    let inputX = centerX - width * 4 - offestX * 3 - 5 ;
     
-    for (let i = 1; i <= 6; i += 1) {
-      inputX += width + offestX;
-      const input = new CustomInput(this.scene, inputX, inputY, i, this.bg);
-      this.scene.inputs.push(input);
-    }
+    const input = new CustomInput(this.scene, centerX, inputY, this.bg);
+    this.scene.inputs.push(input);
   }
   
   private updateState(): void {

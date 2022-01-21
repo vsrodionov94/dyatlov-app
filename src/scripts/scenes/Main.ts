@@ -60,7 +60,7 @@ export default class Main extends Phaser.Scene {
   }
 
   private onFaqClick(): void {
-    this.scene.launch('Tutorial');
+    this.scene.launch('Tutorial', { stage: 0 });
   }
 
   private onFileClick(): void {

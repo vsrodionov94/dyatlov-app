@@ -30,7 +30,7 @@ export default class Tutorial extends Phaser.Scene {
   }
 
   public init(data: { stage: number }) {
-    if ((data.stage || data.stage === 0) && data.stage < langs.length) this.stage = data.stage;
+    if ((data.stage && data.stage >= 0 || data.stage === 0) && data.stage < langs.length) this.stage = data.stage;
   }
 
   public create() {
@@ -55,10 +55,12 @@ export default class Tutorial extends Phaser.Scene {
     const lang = langs[this.stage];
     const title = this.add.text(centerX, centerY - 400, lang.title, textStyle).setOrigin(0.5, 0);
     const text = this.add.text(centerX, title.getBounds().bottom, lang.text, textStyle).setOrigin(0.5, 0);
+    this.setSwipe(text);
     this.createCircles(text.getBounds().bottom + 50);
-    Utils.click(text, () => {
-      this.scene.restart({ stage: this.stage + 1 });
-    });
+    // Utils.click(text, () => {
+    //   this.scene.restart({ stage: this.stage + 1 });
+    // });
+    if (this.stage === 1 || this.stage === 4) this.createLinkZone();
   }
 
   private createCircles(y: number): void {
@@ -68,5 +70,53 @@ export default class Tutorial extends Phaser.Scene {
       const circle = this.add.sprite(startX + i * 35, y, i === this.stage ? 'circle-red' : 'circle');
       Utils.click(circle, () => { this.scene.restart({ stage: i }); });
     }
+  }
+
+  private createLinkZone(): void {
+    const { centerX, centerY } = this.cameras.main;
+    const zoneHeight = 50;
+    const stage1 = { x: centerX - 290, y: centerY - 190, width: 280 };
+    const stage4 = { x: centerX + 320, y: centerY + 140, width: 150 };
+    const stage = this.stage === 1 ? stage1 : stage4;
+    const link = this.stage === 1 ? process.env.TWITCH_LINK : process.env.RULE_LINK;
+    const tile = this.add.tileSprite(stage.x, stage.y, stage.width, 3  , 'white-pixel');
+    const zone = this.add.tileSprite(stage.x, stage.y - zoneHeight / 2, stage.width, zoneHeight, 'pixel');
+    Utils.click(zone, () => { this.openLink(link); });
+    Utils.setHoverEffect(tile);
+  }
+
+  private openLink(link: string): void {
+    window.open(link);
+  }
+
+  private setSwipe(button: any): void {
+    button.setInteractive();
+    const offestX = 100;
+    button.on('pointerdown', (e): void => {
+      button.press = true;
+      button.dX = 0;
+      button.currentX = e.position.x;
+    });
+    
+    button.on('pointermove', (e): void => {
+      if (button.press) button.dX += button.currentX - e.position.x;
+    });
+
+    button.on('pointerout', (e): void => {
+      if (button.dX > offestX) left();
+      if (button.dX < -offestX) right();
+    });
+
+    button.on('pointerup', (e): void => {
+      if (button.dX > offestX) left();
+      if (button.dX < -offestX) right();
+    });
+
+    const left = () => { 
+      this.scene.restart({ stage: this.stage + 1 }); 
+    };
+    const right = () => { 
+      this.scene.restart({ stage: this.stage - 1 }); 
+    };
   }
 };

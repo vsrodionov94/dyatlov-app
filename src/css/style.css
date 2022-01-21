@@ -69,15 +69,16 @@ canvas {
 }
 
 
-.lock {
+#lock {
   display: none;
   position: absolute;
-  width: 8.5%;
+  width: 59%;
   top: 59.5%;
-  left: 21%;
+  left: 20.5%;
   bottom: 33.5%;
   z-index: 10;
   border: none;
+  box-sizing: border-box;
   font-family: 'NewCodeProLc';
   font-size: 200%;
   color: '#974f00';
@@ -85,35 +86,9 @@ canvas {
   background-color: transparent;
 }
 
-#lock-1 {
-  left: 21%;
-}
-
-#lock-2 {
-  left: 31%;
-}
-
-#lock-3 {
-  left: 41%;
-}
-
-#lock-4 {
-  left: 51%;
-}
-
-#lock-5 {
-  left: 61%;
-}
-
-#lock-6 {
-  left: 71%;
-}
-
-
 #lock:focus {
   border: none;
   background: transparent;
-  /* background: rgba(0, 0, 0, 0.5); */
 }
 
 #radio {

@@ -1,4 +1,4 @@
-import { StateType, ModalTypes } from "../types";
+import { StateType, ModalTypes, CheckAudioData } from "../types";
 import Lock, { CustomInput } from './../components/modal/Lock';
 import Main from './Main';
 import Radio from './../components/modal/Radio';
@@ -7,6 +7,16 @@ import FileSend from './../components/modal/FileSend';
 import Utils from './../libs/Utils';
 import Stats from './../components/Stats';
 
+const audioSrc = {
+  day0: require('../../assets/sound/day-0.wav'),
+  day1: require('../../assets/sound/day-1.wav'),
+  day2: require('../../assets/sound/day-2.wav'),
+  day3: require('../../assets/sound/day-3.wav'),
+  day7: require('../../assets/sound/day-7.wav'),
+  day8: require('../../assets/sound/day-8.wav'),
+  day9: require('../../assets/sound/day-9.wav'),
+  day10: require('../../assets/sound/day-10.wav'),
+};
 export default class Modal extends Phaser.Scene {
   public state: StateType;
   public mainScene: Main;
@@ -16,6 +26,16 @@ export default class Modal extends Phaser.Scene {
 
   constructor() {
     super('Modal');
+  }
+
+  public preload(): void {
+    if (this.state.modal === ModalTypes.Radio) {
+      const data = this.state.modalData as CheckAudioData;
+      const hasAudio = data.hasAudio;
+      if (!Utils.checkTryCount(data.tryCount) && hasAudio) {
+        this.load.audio(`day-${data.currentDay}`, audioSrc[`day${data.currentDay}`]);
+      }
+    }
   }
 
   public init(state: StateType): void {
@@ -78,15 +98,18 @@ export default class Modal extends Phaser.Scene {
         stage = 2;
         break;
       case ModalTypes.FileAnswer:
+        stage = 3;
+        break;
       case ModalTypes.FileSend:
         stage = 3;
         break;
     }
+
     Utils.clickButton(this, this.faqBtn, () => {
       this.inputs.forEach(el => {
         el?.blur();
-        this.scene.launch('Tutorial', { stage });
       });
+      this.scene.launch('Tutorial', { stage });
     });
   }
 };
