@@ -68,8 +68,8 @@ type TryAudioData = {
   tryCount: number;
 };
 type UserForAnswerData = { error: boolean; tryCount: number; user: UserData; };
-type TrySendUserData = { error: boolean, tryCount: number };
-type TryAnswerUserData = { error: boolean; tryCount: number; artifacts: number; }
+type TrySendUserData = { error: boolean; tryCount: number; artifacts: number; };
+type TryAnswerUserData = { error: boolean; tryCount: number; artifacts: number; };
 
 export {
   ModalTypes,

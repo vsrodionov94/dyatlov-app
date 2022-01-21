@@ -23,8 +23,8 @@ export default class FileAnswer {
   
   private createElements() {
     const { centerX, centerY } = this.scene.cameras.main;
-    const helpBtn = this.scene.add.sprite(centerX - 286, centerY + 500, 'answer-help-btn').setOrigin(0, 0.5);
-    const unhelpBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30, centerY + 500, 'answer-unhelp-btn').setOrigin(0, 0.5);
+    const helpBtn = this.scene.add.sprite(centerX - 286 + 287 / 2, centerY + 500, 'answer-help-btn');
+    const unhelpBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30 + 284 / 2, centerY + 500, 'answer-unhelp-btn');
 
     Utils.clickButton(this.scene, helpBtn, () => { this.onHelpClick();});
     Utils.clickButton(this.scene, unhelpBtn, () => { this.onUnhelpClick();});

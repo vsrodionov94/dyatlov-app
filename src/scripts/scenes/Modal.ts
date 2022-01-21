@@ -78,15 +78,18 @@ export default class Modal extends Phaser.Scene {
         stage = 2;
         break;
       case ModalTypes.FileAnswer:
+        stage = 3;
+        break;
       case ModalTypes.FileSend:
         stage = 3;
         break;
     }
+
     Utils.clickButton(this, this.faqBtn, () => {
       this.inputs.forEach(el => {
         el?.blur();
-        this.scene.launch('Tutorial', { stage });
       });
+      this.scene.launch('Tutorial', { stage });
     });
   }
 };

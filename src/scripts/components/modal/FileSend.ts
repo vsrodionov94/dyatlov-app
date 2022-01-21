@@ -24,9 +24,9 @@ export default class FileSend {
   
   private createElements() {
     const { centerX, centerY } = this.scene.cameras.main;
-    const helpBtn = this.scene.add.sprite(centerX - 445, centerY + 500, 'send-help-btn').setOrigin(0, 0.5);
-    const skipBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30, centerY + 500, 'send-skip-btn').setOrigin(0, 0.5);
-    const unhelpBtn = this.scene.add.sprite(skipBtn.getBounds().right + 30, centerY + 500, 'send-unhelp-btn').setOrigin(0, 0.5);
+    const helpBtn = this.scene.add.sprite(centerX - 445 + 257 / 2, centerY + 500, 'send-help-btn');
+    const skipBtn = this.scene.add.sprite(helpBtn.getBounds().right + 30 + 329 / 2, centerY + 500, 'send-skip-btn');
+    const unhelpBtn = this.scene.add.sprite(skipBtn.getBounds().right + 30 + 284 / 2, centerY + 500, 'send-unhelp-btn');
 
     Utils.clickButton(this.scene, helpBtn, () => { this.onHelpClick();});
     Utils.clickButton(this.scene, skipBtn, () => { this.onSkipClick();});
@@ -62,6 +62,9 @@ export default class FileSend {
     api.trySendUser(data).then(data => {
       if (!data.error) {
         this.modalData.tryCount = data.tryCount;
+        this.scene.state.artifacts = data.artifacts;
+        this.scene.stats.updateArtifacts(data.artifacts);
+        this.scene.mainScene.stats.updateArtifacts(data.artifacts);
         this.getNewUser();
       }
     });
