@@ -43,7 +43,7 @@ export class CustomInput {
     this.input.setAttribute("maxlength", "6");
     this.input.oninput = (e: InputEvent) => {
       const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-      if (!digits.some(el => el === e.data)) {
+      if (e.data && !digits.some(el => el === e.data)) {
         this.input.value = this.input.value.slice(0, -1);
       }
     }
