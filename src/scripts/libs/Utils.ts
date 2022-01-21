@@ -90,7 +90,7 @@ export default class Utils {
     
   }
 
-  public static setHoverEffect(btn: Phaser.GameObjects.Sprite): void {
+  public static setHoverEffect(btn: Phaser.GameObjects.Sprite | Phaser.GameObjects.TileSprite): void {
     btn.on('pointerover',() => { btn.setAlpha(0.8); });
     btn.on('pointerout',() => { btn.setAlpha(1); });
   }

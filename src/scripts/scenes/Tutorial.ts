@@ -59,6 +59,7 @@ export default class Tutorial extends Phaser.Scene {
     Utils.click(text, () => {
       this.scene.restart({ stage: this.stage + 1 });
     });
+    if (this.stage === 1 || this.stage === 4) this.createLinkZone();
   }
 
   private createCircles(y: number): void {
@@ -68,5 +69,22 @@ export default class Tutorial extends Phaser.Scene {
       const circle = this.add.sprite(startX + i * 35, y, i === this.stage ? 'circle-red' : 'circle');
       Utils.click(circle, () => { this.scene.restart({ stage: i }); });
     }
+  }
+
+  private createLinkZone(): void {
+    const { centerX, centerY } = this.cameras.main;
+    const zoneHeight = 50;
+    const stage1 = { x: centerX - 290, y: centerY - 190, width: 280 };
+    const stage4 = { x: centerX + 320, y: centerY + 140, width: 150 };
+    const stage = this.stage === 1 ? stage1 : stage4;
+    const link = this.stage === 1 ? process.env.TWITCH_LINK : process.env.RULE_LINK;
+    const tile = this.add.tileSprite(stage.x, stage.y, stage.width, 3  , 'white-pixel');
+    const zone = this.add.tileSprite(stage.x, stage.y - zoneHeight / 2, stage.width, zoneHeight, 'pixel');
+    Utils.click(zone, () => { this.openLink(link); });
+    Utils.setHoverEffect(tile);
+  }
+
+  private openLink(link: string): void {
+    window.open(link);
   }
 };
