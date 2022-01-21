@@ -98,6 +98,7 @@ export default class Radio {
     const root: HTMLDivElement = document.querySelector('#root');
     this.input = document.createElement('input');
     root.append(this.input);
+    this.input.setAttribute("maxlength", "8");
     this.input.setAttribute("id", "radio");
     this.input.setAttribute("autocomplete", "off");
     this.scene.inputs.push(this.input);

@@ -13,8 +13,6 @@ const inviteIcon: string = require('../../assets/images/stats/invite.png');
 const pixel: string = require('../../assets/images/pixel.png');
 const whitePixel: string = require('../../assets/images/white-pixel.jpg');
 const lockBg: string = require('../../assets/images/modal/lock-bg.png');
-const lockInput: string = require('../../assets/images/modal/lock-input.png');
-const lockInputError: string = require('../../assets/images/modal/lock-input-error.png');
 const radioInput: string = require('../../assets/images/modal/radio-input.png');
 const radioInputError: string = require('../../assets/images/modal/radio-input-error.png');
 const sendBtn: string = require('../../assets/images/modal/send-btn.png');
@@ -31,14 +29,6 @@ const sendUnhelpBtn: string = require('../../assets/images/modal/file-send-unhel
 const sendSkipBtn: string = require('../../assets/images/modal/file-send-skip-btn.png');
 const avatar: string = require('../../assets/images/modal/avatar.png');
 const closeBtn: string = require('../../assets/images/faq/close-btn.png');
-const day0: string = require('../../assets/sound/day-0.wav');
-const day1: string = require('../../assets/sound/day-1.wav');
-const day2: string = require('../../assets/sound/day-2.wav');
-const day3: string = require('../../assets/sound/day-3.wav');
-const day7: string = require('../../assets/sound/day-7.wav');
-const day8: string = require('../../assets/sound/day-8.wav');
-const day9: string = require('../../assets/sound/day-9.wav');
-const day10: string = require('../../assets/sound/day-10.wav');
 const circleRed: string = require('../../assets/images/faq/circle-red.png');
 const circle: string = require('../../assets/images/faq/circle.png');
 
@@ -67,8 +57,6 @@ class Preload extends Phaser.Scene {
     this.load.image('pixel', pixel);
     this.load.image('white-pixel', whitePixel);
     this.load.image('lock-bg', lockBg);
-    this.load.image('lock-input', lockInput);
-    this.load.image('lock-input-error', lockInputError);
     this.load.image('radio-input', radioInput);
     this.load.image('radio-input-error', radioInputError);
     this.load.image('send-btn', sendBtn);
@@ -87,14 +75,6 @@ class Preload extends Phaser.Scene {
     this.load.image('close-btn', closeBtn);
     this.load.image('circle-red', circleRed);
     this.load.image('circle', circle);
-    this.load.audio('day-0', day0);
-    this.load.audio('day-1', day1);
-    this.load.audio('day-2', day2);
-    this.load.audio('day-3', day3);
-    this.load.audio('day-7', day7);
-    this.load.audio('day-8', day8);
-    this.load.audio('day-9', day9);
-    this.load.audio('day-10', day10);
   }
 
   public create(): void {
