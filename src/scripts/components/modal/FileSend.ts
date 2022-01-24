@@ -1,9 +1,9 @@
 import Modal from '../../scenes/Modal';
 import Utils from '../../libs/Utils';
-import { AnswerUserData, ModalTypes, RandomUserData, TrySendUserData } from '../../types';
+import { AnswerUserData, ModalTypes, RandomUserData } from '../../types';
 import api from '../../libs/Api';
-import { MAX_TRY_COUNT } from '../../constants';
-import { Data } from 'phaser';
+import Hint from './../Hint';
+import Hints from '../../scenes/Hints';
 
 export default class FileSend {
   private scene: Modal;
@@ -61,6 +61,9 @@ export default class FileSend {
     };
     api.trySendUser(data).then(data => {
       if (!data.error) {
+        const hintStr = answer ? `Ты помог ${this.modalData.user.name}` : `Ты помешал ${this.modalData.user.name}`;
+        const hintScene = this.scene.scene.get('Hints') as Hints;
+        Hint.create(hintScene, -350, hintStr, 2);
         this.modalData.tryCount = data.tryCount;
         this.scene.state.artifacts = data.artifacts;
         this.scene.stats.updateArtifacts(data.artifacts);

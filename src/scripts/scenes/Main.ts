@@ -23,6 +23,7 @@ export default class Main extends Phaser.Scene {
   public init(state: StateType): void {
     this.state = state;
     this.getData = { vkId: this.state.vkId };
+    this.scene.launch('Hints');
   }
 
   public create(): void {

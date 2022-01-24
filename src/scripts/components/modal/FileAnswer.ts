@@ -2,7 +2,8 @@ import Modal from '../../scenes/Modal';
 import Utils from '../../libs/Utils';
 import { AnswerUserData, ModalTypes, UserForAnswerData } from '../../types';
 import api from '../../libs/Api';
-import { MAX_TRY_COUNT } from '../../constants';
+import Hint from '../Hint';
+import Hints from '../../scenes/Hints';
 
 export default class FileAnswer {
   private scene: Modal;
@@ -54,6 +55,9 @@ export default class FileAnswer {
     };
     api.tryAnswerUser(data).then(data => {
       if (!data.error) {
+        const hintStr = this.scene.state.artifacts < data.artifacts ? `Ты угадал` : `Ты не угадал`;
+        const hintScene = this.scene.scene.get('Hints') as Hints;
+        Hint.create(hintScene, -350, hintStr, 2);
         this.scene.state.artifacts = data.artifacts;
         this.scene.mainScene.stats.updateArtifacts(data.artifacts);
         this.scene.stats.updateArtifacts(data.artifacts);
