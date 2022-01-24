@@ -97,11 +97,10 @@ export default class FileAnswer {
     const { centerY } = this.scene.cameras.main;
 
     const { name, sex, age, id, photo } = this.modalData.user;
-    const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5);
-    const mask = new Phaser.Display.Masks.BitmapMask(this.scene, avatar);
+    const avatar = this.scene.add.sprite(151, centerY + 50, 'avatar').setOrigin(0, 0.5).setVisible(false);
     this.loadAvatarAsset({ id, photo }).then(() => {
       const key = `avatar-${id}`;
-      const texture = this.scene.textures.exists(key) ? key : 'avatar';
+      const texture = this.scene.textures.exists(key) ? key : 'base-avatar';
       const sprite = this.scene.add.sprite(avatar.x, avatar.y, texture);
       const halfWidth = avatar.displayWidth / 2
       const circle = this.scene.add.graphics({ x: avatar.x + halfWidth, y: avatar.y }).fillCircle(0, 0, halfWidth).setVisible(false);

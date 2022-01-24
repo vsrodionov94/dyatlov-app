@@ -28,6 +28,7 @@ const sendHelpBtn: string = require('../../assets/images/modal/file-send-help-bt
 const sendUnhelpBtn: string = require('../../assets/images/modal/file-send-unhelp-btn.png');
 const sendSkipBtn: string = require('../../assets/images/modal/file-send-skip-btn.png');
 const avatar: string = require('../../assets/images/modal/avatar.png');
+const baseAvatar: string = require('../../assets/images/modal/base-avatar.png');
 const closeBtn: string = require('../../assets/images/faq/close-btn.png');
 const circleRed: string = require('../../assets/images/faq/circle-red.png');
 const circle: string = require('../../assets/images/faq/circle.png');
@@ -72,6 +73,7 @@ class Preload extends Phaser.Scene {
     this.load.image('send-unhelp-btn', sendUnhelpBtn);
     this.load.image('send-skip-btn', sendSkipBtn);
     this.load.image('avatar', avatar);
+    this.load.image('base-avatar', baseAvatar);
     this.load.image('close-btn', closeBtn);
     this.load.image('circle-red', circleRed);
     this.load.image('circle', circle);
