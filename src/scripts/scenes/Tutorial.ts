@@ -103,13 +103,17 @@ export default class Tutorial extends Phaser.Scene {
     });
 
     button.on('pointerout', (e): void => {
-      if (button.dX > offestX) left();
-      if (button.dX < -offestX) right();
+      if (button.dX > offestX) return left();
+      if (button.dX < -offestX) return right();
+      button.dX = 0;
+      button.press = false;
     });
 
     button.on('pointerup', (e): void => {
-      if (button.dX > offestX) left();
-      if (button.dX < -offestX) right();
+      if (button.dX > offestX) return left();
+      if (button.dX < -offestX) return right();
+      button.dX = 0;
+      button.press = false;
     });
 
     const left = () => { 
